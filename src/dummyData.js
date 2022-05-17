@@ -1,42 +1,42 @@
 export const Users = [
   {
     id:1,
-    profilePicture: "assets/person/1.jpeg",
+    profilePicture: "/assets/person/1.jpeg",
     username: "سندس عيسى",
   },
   {
     id:2,
-    profilePicture: "assets/person/2.jpeg",
+    profilePicture: "/assets/person/2.jpeg",
     username: "دانيا علقم",
   },
   {
     id:3,
-    profilePicture: "assets/person/3.jpeg",
+    profilePicture: "/assets/person/3.jpeg",
     username: "رنيم ",
   },
   {
     id:4,
-    profilePicture: "assets/person/4.jpeg",
+    profilePicture: "/assets/person/4.jpeg",
     username: "نورا قواسمي",
   },
   {
     id:5,
-    profilePicture: "assets/person/5.jpeg",
+    profilePicture: "/assets/person/5.jpeg",
     username: "تقى زهد",
   },
   {
     id:6,
-    profilePicture: "assets/person/6.jpeg",
+    profilePicture: "/assets/person/6.jpeg",
     username: "اسيل زبيدي",
   },
   {
     id:7,
-    profilePicture: "assets/person/7.jpeg",
+    profilePicture: "/assets/person/7.jpeg",
     username: "لانا عليان",
   },
   {
     id:8,
-    profilePicture: "assets/person/8.jpeg",
+    profilePicture: "/assets/person/8.jpeg",
     username: "بيسان الغول",
   },
   {
@@ -46,7 +46,7 @@ export const Users = [
   },
   {
     id:10,
-    profilePicture: "assets/person/10.jpeg",
+    profilePicture: "/assets/person/10.jpeg",
     username: "بيبو عيسى",
   },
 ];
@@ -55,7 +55,7 @@ export const Posts = [
   {
     id: 1,
     desc: "يا رب أسافر",
-    photo: "assets/post/1.jpeg",
+    photo: "/assets/post/1.jpeg",
     date: "منذ 5 دقائق",
     userId: 1,
     like: 32,
@@ -63,7 +63,7 @@ export const Posts = [
   },
   {
     id: 2,
-    photo: "assets/post/2.jpeg",
+    photo: "/assets/post/2.jpeg",
     date: "منذ 15 دقيقة",
     userId: 2,
     like: 2,
@@ -72,7 +72,7 @@ export const Posts = [
   {
     id: 3,
     desc: "كل لحظة هي بداية جديدة",
-    photo: "assets/post/3.jpeg",
+    photo: "/assets/post/3.jpeg",
     date: "منذ 1 ساعة",
     userId: 3,
     like: 61,
@@ -80,7 +80,7 @@ export const Posts = [
   },
   {
     id: 4,
-    photo: "assets/post/4.jpeg",
+    photo: "/assets/post/4.jpeg",
     date: "منذ 4 ساعات",
     userId: 4,
     like: 7,
@@ -88,7 +88,7 @@ export const Posts = [
   },
   {
     id: 5,
-    photo: "assets/post/5.jpeg",
+    photo: "/assets/post/5.jpeg",
     date: "منذ 5 ساعات",
     userId: 5,
     like: 23,
@@ -96,7 +96,7 @@ export const Posts = [
   },
   {
     id: 6,
-    photo: "assets/post/6.jpeg",
+    photo: "/assets/post/6.jpeg",
     date: "منذ 1 يوم",
     userId: 6,
     like: 44,
@@ -105,7 +105,7 @@ export const Posts = [
   {
     id: 7,
     desc: "لا ترفض شيء يجعلك تبتسم",
-    photo: "assets/post/7.jpeg",
+    photo: "/assets/post/7.jpeg",
     date: "منذ يومان",
     userId: 7,
     like: 52,
@@ -113,7 +113,7 @@ export const Posts = [
   },
   {
     id: 8,
-    photo: "assets/post/8.jpeg",
+    photo: "/assets/post/8.jpeg",
     date: "منذ 3 أيام",
     userId: 8,
     like: 15,
@@ -122,7 +122,7 @@ export const Posts = [
   {
     id: 9,
     desc: "غير العالم بان تكون انت ",
-    photo: "assets/post/9.jpeg",
+    photo: "/assets/post/9.jpeg",
     date: "منذ 5 أيام",
     userId: 9,
     like: 11,
@@ -130,7 +130,7 @@ export const Posts = [
   },
   {
     id: 10,
-    photo: "assets/post/10.jpeg",
+    photo: "/assets/post/10.jpeg",
     date: "منذ 7 أيام",
     userId: 10,
     like: 104,

@@ -3,20 +3,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import validator from 'validator';
 import SweetAlert from "sweetalert-react";
+import swal from "sweetalert";
 
 // import { colourOptions } from './';
 
@@ -39,18 +38,17 @@ const theme = createTheme();
 
 export default function SignUp() {
   useEffect(() => {
-    axios
-    .get("http://localhost:3002/fieldofinterest", {
-    })
-    .then((response) => {
-      console.log("Saeeeeeeeeeeeeeeeeeeeeeeeeeed");
+    axios.get("http://localhost:3002/fieldofinterest", {}).then((response) => {
       console.log(response.data);
-      const fi = response.data.map(T => ({value: T.FName, label: T.FName, color: "#5243AA"}));
+      const fi = response.data.map((T) => ({
+        value: T.FName,
+        label: T.FName,
+        color: "#5243AA",
+      }));
       console.log(fi);
       setFields(fi);
-      console.log("Daniaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     });
-  },[]);
+  }, []);
 
   const [uniID, setUniID] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -59,6 +57,8 @@ export default function SignUp() {
   const [fields, setFields] = useState([]);
   const [emailReg, setemailReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
+  const [repasswordReg, setrePasswordReg] = useState("");
+
 
   const register = () => {
     axios
@@ -69,12 +69,13 @@ export default function SignUp() {
         depName: dep,
         Semail: emailReg,
         Spassword: passwordReg,
+        rePassword:repasswordReg
+
       })
       .then((response) => {
         console.log(response);
       });
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -115,13 +116,23 @@ export default function SignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="uniId"
+                  // maxLength={3}
                   required
                   fullWidth
                   id="uniId"
+                  value={uniID}
                   label="الرقم الجامعي"
                   autoFocus
+                  // if (e.target.value === '' || re.test(e.target.value)) {
+                  //    this.setState({value: e.target.value})
+                  // }
                   onChange={(e) => {
-                    setUniID(e.target.value);
+                    const re = /[^0-9]/gi;
+                    if (e.target.value.length === 7) {
+                     window.alert("University ID shouldn't exceed 7 digits");
+                    }
+
+                    setUniID(e.target.value.replace(/[^0-9]/gi, ""));
                   }}
                 />
               </Grid>
@@ -193,6 +204,20 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  required
+                  fullWidth
+                  name="re-password"
+                  label="إعادة كلمة المرور "
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={(e) => {
+                    setrePasswordReg(e.target.value);
+                 }}
+                />
+              </Grid>
 
               <Grid item xs={12}>
                 <Select
@@ -200,8 +225,7 @@ export default function SignUp() {
                   components={animatedComponents}
                   // defaultValue={[fieldOfInterests[4], fieldOfInterests[5]]}
                   isMulti
-                options={fields}
-                  
+                  options={fields}
                 />
               </Grid>
             </Grid>
@@ -217,13 +241,14 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              href="../home/Home"
             >
               إنشاء حساب
             </Button>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" href="./login" variant="body2">
+                <Link to="/login" href="../login/login" variant="body2">
                   هل لديك حساب مسبقًا ؟ تسجيل الدخول
                 </Link>
               </Grid>

@@ -1,0 +1,9 @@
+.homeContainer{
+    display: flex;
+    width: 100%;
+}
+
+
+.bg-light {
+    background-color: rgb(33, 182, 174);
+}

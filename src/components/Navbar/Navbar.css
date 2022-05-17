@@ -4,10 +4,11 @@
     margin-bottom: auto;
     margin-top: auto;
     height: 30px;
-    background: #1f97c2;
+    background: #1443c4;
     border-radius: 20px;
   }
-  
+
+ 
   .fadeInWidth {
     animation: 0.2s linear fadeInWidth;
   }
@@ -24,7 +25,7 @@
   }
   
   .search-input {
-    color: white;
+    color: rgb(15, 15, 15);
     border: 0;
     outline: 0;
     background: none;
@@ -40,7 +41,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: small;
   }
   
@@ -95,3 +96,4 @@
     }
   }
   
+

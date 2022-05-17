@@ -5,17 +5,23 @@ import Search from "./Search";
 import "./Navbar.css"
 
 
+
+
+document.body.style.textAlign="right";
 const App = () => {
+  
   
 
   return (
-    <Navbar
+    <Navbar 
       collapseOnSelect
       expand="md"
-      bg="light"
-      variant="light"
+      bg="dark"
+      variant="dark"
       className="px-4 py-8"
       fixed="top"
+      
+
     >
       <Navbar.Brand>BZUSociety</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-na" />
@@ -24,10 +30,14 @@ const App = () => {
           {/* <Nav.Link className="pl-4">Cart</Nav.Link> */}
         </Nav>
         <Nav className="mr-auto align-items-end px-3">
-          <Nav.Link>حسابي</Nav.Link>
-          <Nav.Link>الصفحة الرئيسية</Nav.Link>
-          <Nav.Link>المدرسين</Nav.Link>
-          <Nav.Link>المكتبة</Nav.Link>
+          <Nav.Link href="../profile/Profile">حسابي</Nav.Link>
+          <Nav.Link href="../login/Login">من نحن</Nav.Link>
+
+          <Nav.Link href="../home/Home">الصفحة الرئيسية</Nav.Link>
+          <Nav.Link href="../professors/professorsPage"> المدرسين </Nav.Link>
+          <Nav.Link href="">المكتبة</Nav.Link>
+          <Nav.Link href="../login/Login">تسجيل الخروج</Nav.Link>
+          
         </Nav>
       
       </Navbar.Collapse>

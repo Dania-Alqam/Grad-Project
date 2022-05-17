@@ -16,19 +16,18 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-          <MoreVert />
-          </div>
-          <div className="postTopRight">
-          <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
-          </span>
-          <span className="postDate">{post.date}</span>
-          
             <img
               className="postProfileImg"
               src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
               alt=""
             />
+            <span className="postUsername">
+              {Users.filter((u) => u.id === post?.userId)[0].username}
+            </span>
+            <span className="postDate">{post.date}</span>
+          </div>
+          <div className="postTopRight">
+            <MoreVert />
           </div>
         </div>
         <div className="postCenter">
@@ -37,14 +36,12 @@ export default function Post({ post }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-          <span className="postCommentText">{post.comment} التعليقات</span>
-            
+            <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
+            <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
+            <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-          <span className="postLikeCounter">{like} أعجب به</span>
-          <img className="likeIcon" src="public/assets/like.png" onClick={likeHandler} alt="" />
-          <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
-            
+            <span className="postCommentText">{post.comment} comments</span>
           </div>
         </div>
       </div>
