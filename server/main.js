@@ -32,17 +32,17 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/fieldofinterest", (req, res) => {
   con.query("SELECT FName FROM fieldofinterest", (err, result) => {
-	console.log("Doneee field ts!");
+    console.log("Doneee field ts!");
     if (err) {
       res.send({
         err: err,
       });
     }
-	console.log("Doneee field of i..!");
-	console.log(result)
+    console.log("Doneee field of i..!");
+    console.log(result);
     if (result) {
       res.send(result);
-	  console.log(result);
+      console.log(result);
       console.log("Doneee field of interests!");
     }
   });
@@ -51,7 +51,7 @@ app.get("/fieldofinterest", (req, res) => {
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  
+  console.log(req.body);
   con.query(
     "select * from student where Semail = ? AND Spassword= ?",
     [email, password],
@@ -80,26 +80,39 @@ app.post("/register", (req, res) => {
   const Spassword = req.body.Spassword;
   const universityID = req.body.universityID;
   const depName = req.body.depName;
-
-  con.query(
-    "insert into student (Sfirst_name, Slast_name, Semail, Spassword, universityID, depName) VALUES (?,?,?,?,?,?)",
-    [Sfirst_name, Slast_name, Semail, Spassword, universityID, depName],
-    (err, result) => {
+  const rePassword = req.body.rePassword;
+  
+  if (rePassword == Spassword) {
+    var sql = "select * from student where Semail = ?"; 
+    con.query(sql, [Semail], function (err, result, fields) {
       if (err) {
-        res.send({
-          err: err,
-        });
-      }
-      if (result) {
-        res.send(result);
-		console.log("Done2424r45")
+        throw err;
+      } else if (result.length > 0) {
+        req.session.flag = 1;
+        console.log("tmmmmmmmm");
       } else {
-        res.send({
-          message: "Wrong Email or password ",
-        });
+        con.query(
+          "insert into student (Sfirst_name, Slast_name, Semail, Spassword, universityID, depName) VALUES (?,?,?,?,?,?)",
+          [Sfirst_name, Slast_name, Semail, Spassword, universityID, depName],
+          (err, result) => {
+            if (err) {
+              res.send({
+                err: err,
+              });
+            }
+            if (result) {
+              res.send(result);
+              console.log("Done2424r45");
+            } else {
+              res.send({
+                message: "Wrong Email or password ",
+              });
+            }
+          }
+        );
       }
-    }
-  );
+    });
+  }
 });
 
 app.listen(3002, () => {
