@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { render } from "react-dom";
@@ -21,19 +20,21 @@ import Album from "./pages/professors/professorsPage";
 import RatingSummary from "./pages/professors/ratingSummary"; 
 import Dashboard from "./pages/professors/detailedRate";
 import RatingForm from "./pages/professors/rateprof";
+ import Begin from "./pages/begin";
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
+import React, { lazy, Suspense } from "react";
+// const Begin = lazy(() => import("./pages/begin"));
 
 
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(Begin);
 
-
-// import { Login } from '@mui/icons-material';
 
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      {/* <Route path="Register" element={<SignUp />} />
-      <Route path="login" element={<SignInSide />} /> */}
+      <Route path="/" element={<Begin />} />
       <Route path="pages/profile/Profile" element={<Profile />} />
       <Route path="pages/home/Home" element={<Home />} />
       <Route path="Dashboard" element={<DashboardLayout />} />
@@ -44,9 +45,6 @@ render(
       <Route path="pages/professors/rateprof" element={<RatingForm />} />
       <Route path="pages/login/Login" element={<SignInSide />} />
       <Route path="pages/register/Register" element={<SignUp />} />
-
-
-
     </Routes>
   </BrowserRouter>,
   rootElement

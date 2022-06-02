@@ -1,0 +1,68 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+/* external css: flickity.css, fullscreen.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+    text-align: center !important;
+    margin: 0 !important;
+
+}
+
+.carousel {
+    background: #222;
+}
+
+.size {
+    display: inline-block !important;
+    max-width: 500px !important;
+    max-height: 500px !important;
+}
+
+.size img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.carousel-cell {
+    width: 100%;
+    height: 300px;
+    margin-right: 10px;
+    /* center images in cells with flexbox */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel.is-fullscreen .carousel-cell {
+    height: 100%;
+}
+
+.carousel-cell-image {
+    display: block;
+    max-height: 100%;
+}
+
+.carousel-cell-image {
+    max-width: 100%;
+}
+
+.button{
+    background-color: #86CA9A;
+    border: none;
+    color: white;
+    padding: 6px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 2px;
+}

@@ -13,14 +13,9 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import validator from 'validator';
-import SweetAlert from "sweetalert-react";
-import swal from "sweetalert";
-
-// import { colourOptions } from './';
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import validator from "validator";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 document.dir = "rtl";
 
 // export const fieldOfInterests = [
@@ -37,6 +32,7 @@ const animatedComponents = makeAnimated();
 const theme = createTheme();
 
 export default function SignUp() {
+
   useEffect(() => {
     axios.get("http://localhost:3002/fieldofinterest", {}).then((response) => {
       console.log(response.data);
@@ -50,40 +46,116 @@ export default function SignUp() {
     });
   }, []);
 
+  useEffect(() => {
+    axios.get("http://localhost:3002/professorPage", {}).then((response) => {
+      console.log(response.data);
+      const dep = response.data.map((T) => ({
+        value: T.depName,
+        label: T.depName,
+        color: "#5243AA",
+      }));
+
+      setdep(dep);
+      console.log("*************************************************************")
+      console.log("hffffffF" + dep.value);
+      console.log("hffffF" + dep[0].value);
+      console.log("hjhnnhF" + dep);
+    });
+  }, []);
+
   const [uniID, setUniID] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setlastName] = useState("");
-  const [dep, setdep] = useState("");
+  const [dep, setdep] = useState([]);
   const [fields, setFields] = useState([]);
   const [emailReg, setemailReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
   const [repasswordReg, setrePasswordReg] = useState("");
+  const[selectedValue,setSelectedValue] = useState("");
+  // const register = () => {
+  //   axios
+  //     .post("http://localhost:3002/register", {
+  //       Sfirst_name: firstName,
+  //       Slast_name: lastName,
+  //       universityID: uniID,
+  //       depName: dep,
+  //       Semail: emailReg,
+  //       Spassword: passwordReg,
+  //       rePassword: repasswordReg,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     });
+  // };
 
 
-  const register = () => {
-    axios
-      .post("http://localhost:3002/register", {
-        Sfirst_name: firstName,
-        Slast_name: lastName,
-        universityID: uniID,
-        depName: dep,
-        Semail: emailReg,
-        Spassword: passwordReg,
-        rePassword:repasswordReg
-
-      })
-      .then((response) => {
-        console.log(response);
-      });
-  };
+  const handleSelect = (event) => {
+  console.log("event is "+event.target.value)
+  setSelectedValue(event.target.value);
+}
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const validation = this.validator.validate(this.state);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+  };
+
+  const [userInfo, setuserInfo] = useState({
+    file: [],
+    filepreview: null,
+  });
+
+  const handleInputChange = (event) => {
+    setuserInfo({
+      ...userInfo,
+      file: event.target.files[0],
+      filepreview: URL.createObjectURL(event.target.files[0]),
+    });
+  };
+
+  const [isSucces, setSuccess] = useState(null);
+
+  const submit = async () => {
+    console.log("The selected value is "+selectedValue);
+    const formdata = new FormData();
+    formdata.append("avatar", userInfo.file);
+    formdata.append("firstName", firstName);
+    formdata.append("lastName", lastName);
+    formdata.append("dep", dep);
+
+    console.log("1" + dep);
+    console.log("1" + dep[0]);
+
+    formdata.append("uniID", uniID);
+    formdata.append("emailReg", emailReg);
+    formdata.append("passwordReg", passwordReg);
+    formdata.append("repasswordReg", repasswordReg);
+    
+    axios
+      .post("http://localhost:3002/register", formdata, {
+        // Slast_name: lastName,
+        // universityID: uniID,
+        // depName: dep,
+        // Semail: emailReg,
+        // Spassword: passwordReg,
+        // rePassword: repasswordReg,
+
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        console.log("12244");
+
+        // then print response status
+        console.warn(res);
+        if (res.data.success === 1) {
+          setSuccess("Image upload successfully");
+          console.log("Image upload successfully");
+        }
+      });
   };
 
   return (
@@ -116,27 +188,22 @@ export default function SignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="uniId"
-                  // maxLength={3}
                   required
                   fullWidth
                   id="uniId"
                   value={uniID}
                   label="الرقم الجامعي"
                   autoFocus
-                  // if (e.target.value === '' || re.test(e.target.value)) {
-                  //    this.setState({value: e.target.value})
-                  // }
                   onChange={(e) => {
                     const re = /[^0-9]/gi;
-                    if (e.target.value.length === 7) {
-                     window.alert("University ID shouldn't exceed 7 digits");
+                    if (e.target.value.length > 7) {
+                      window.alert("University ID shouldn't exceed 7 digits");
+                    } else {
+                      setUniID(e.target.value.replace(/[^0-9]/gi, ""));
                     }
-
-                    setUniID(e.target.value.replace(/[^0-9]/gi, ""));
                   }}
                 />
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
@@ -163,19 +230,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  name="department"
-                  label="الدائرة"
-                  id="department"
-                  autoComplete="new-password"
-                  onChange={(e) => {
-                    setdep(e.target.value);
-                  }}
-                />
-              </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
@@ -185,7 +240,14 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                   onChange={(e) => {
-                    setemailReg(e.target.value);
+                    var filter =
+                      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+                    if (!filter.test(e.target.value)) {
+                      alert("Please provide a valid email address");
+                    } else {
+                      setemailReg(e.target.value);
+                    }
                   }}
                 />
               </Grid>
@@ -204,7 +266,7 @@ export default function SignUp() {
                   }}
                 />
               </Grid>
-              <Grid item xs={12} >
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -215,11 +277,11 @@ export default function SignUp() {
                   autoComplete="new-password"
                   onChange={(e) => {
                     setrePasswordReg(e.target.value);
-                 }}
+                  }}
                 />
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <Select
                   closeMenuOnSelect={false}
                   components={animatedComponents}
@@ -228,9 +290,28 @@ export default function SignUp() {
                   options={fields}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <Select
+                  options={dep}
+                  closeMenuOnSelect={false}
+                  //  onChange={handleSelect}
+                />
+              </Grid>
             </Grid>
+
+            {/* {isSucces !== null ? <h4> {isSucces} </h4> : null} */}
+            <div className="form-row">
+              <label>اختر صورة شخصية </label>
+              <input
+                type="file"
+                className="form-control"
+                name="upload_file"
+                onChange={handleInputChange}
+              />
+            </div>
+
             <Button
-              onClick={register}
+              onClick={() => submit()}
               style={{
                 borderRadius: 35,
                 backgroundColor: "#21b6ae",
@@ -241,7 +322,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              href="../home/Home"
+              // href="../home/Home"
             >
               إنشاء حساب
             </Button>

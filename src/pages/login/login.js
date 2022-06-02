@@ -19,8 +19,6 @@ import { useEffect, useState } from "react";
 import validator from "validator";
 import swal from "sweetalert";
 
-
-
 function Copyright(props) {
   return (
     <Typography
@@ -37,17 +35,18 @@ function Copyright(props) {
       {"."}
     </Typography>
   );
-} 
+}
 
 // document.dir = "rtl";
 
 const theme = createTheme();
 
 export default function SignInSide() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [Semail, setEmail] = useState("");
+  const [Spassword, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  // const [loginStatus, setloginStatus] = useState("");
+
   const validateEmail = (e) => {
     var email = e.target.value;
 
@@ -59,23 +58,24 @@ export default function SignInSide() {
   };
 
   useEffect(() => {
-    console.log(email);
-    console.log(password);
+    console.log(Semail);
+    console.log(Spassword);
   });
 
   const login = () => {
-    // if (isEmail(Email)) {
-    //    sweetALert.
-    // }
-   
     axios
       .post("http://localhost:3002/login", {
-        email: email,
-        password: password,
+        Semail: Semail,
+        password: Spassword,
       })
-      .then((response) => {
-        console.log(response);
-      });
+      console.log(Semail)
+      // .then((response) => {
+      //   if (response.data.message) {
+      //     window.alert(response.data.message);
+      //   } else {
+      //    window.alert("successfully logged in");
+      //   }
+      // });
   };
 
   const handleSubmit = (event) => {
@@ -138,9 +138,8 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={email}
+                value={Semail}
                 // onChange={(e) => validateEmail(e)}
-
                 onChange={(e) => {
                   setEmail(e.target.value);
                   validateEmail(e);
@@ -154,6 +153,7 @@ export default function SignInSide() {
               >
                 {emailError}
               </span>
+
               <TextField
                 margin="normal"
                 required
@@ -163,7 +163,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={password}
+                value={Spassword}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel
@@ -181,7 +181,6 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                href="pages/profile/Profile"
                 onClick={login}
               >
                 تسجيل الدخول
@@ -198,6 +197,8 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
+
+              {/* <h1>{loginStatus} </h1> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
