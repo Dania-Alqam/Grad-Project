@@ -32,9 +32,8 @@ const animatedComponents = makeAnimated();
 const theme = createTheme();
 
 export default function SignUp() {
-
   useEffect(() => {
-    axios.get("http://localhost:3002/fieldofinterest", {}).then((response) => {
+    axios.get("http://localhost:5000/fieldofinterest", {}).then((response) => {
       console.log(response.data);
       const fi = response.data.map((T) => ({
         value: T.FName,
@@ -47,31 +46,30 @@ export default function SignUp() {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/professorPage", {}).then((response) => {
-      console.log(response.data);
+    axios.get("http://localhost:5000/department", {}).then((response) => {
       const dep = response.data.map((T) => ({
         value: T.depName,
         label: T.depName,
         color: "#5243AA",
       }));
-
       setdep(dep);
-      console.log("*************************************************************")
-      console.log("hffffffF" + dep.value);
+      console.log(
+        "*************************************************************"
+      );
       console.log("hffffF" + dep[0].value);
       console.log("hjhnnhF" + dep);
     });
   }, []);
 
-  const [uniID, setUniID] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setlastName] = useState("");
-  const [dep, setdep] = useState([]);
+  const [universityID, setUniID] = useState("");
+  const [Sfirst_name, setFirstName] = useState("");
+  const [Slast_name, setlastName] = useState("");
+  const [depName, setdep] = useState([]);
   const [fields, setFields] = useState([]);
-  const [emailReg, setemailReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const [repasswordReg, setrePasswordReg] = useState("");
-  const[selectedValue,setSelectedValue] = useState("");
+  const [Semail, setemailReg] = useState("");
+  const [Spassword, setPasswordReg] = useState("");
+  const [rePassword, setrePasswordReg] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
   // const register = () => {
   //   axios
   //     .post("http://localhost:3002/register", {
@@ -88,20 +86,17 @@ export default function SignUp() {
   //     });
   // };
 
-
   const handleSelect = (event) => {
-  console.log("event is "+event.target.value)
-  setSelectedValue(event.target.value);
-}
+    console.log("event is " + event.target.value);
+    setSelectedValue(event.target.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validation = this.validator.validate(this.state);
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // const validation =validator.validate(this.state);
+    // const data = new FormData(event.currentTarget);
+    console.log(event.target.lastName.value)
+   
   };
 
   const [userInfo, setuserInfo] = useState({
@@ -119,42 +114,50 @@ export default function SignUp() {
 
   const [isSucces, setSuccess] = useState(null);
 
-  const submit = async () => {
-    console.log("The selected value is "+selectedValue);
+  const sbmit = async () => {
+    console.log("The selected value is " + selectedValue);
     const formdata = new FormData();
-    formdata.append("avatar", userInfo.file);
-    formdata.append("firstName", firstName);
-    formdata.append("lastName", lastName);
-    formdata.append("dep", dep);
+   formdata.append("avatar", userInfo.file);
+    formdata.append("Sfirst_name", Sfirst_name);
+    console.log("First Name :"+Sfirst_name)
+    formdata.append("Slast_name", Slast_name);
+    formdata.append("depName", depName);
+    formdata.append("universityID", universityID);
+    formdata.append("Semail", Semail);
+    formdata.append("Spassword", Spassword);
+    formdata.append("rePassword", rePassword);
 
-    console.log("1" + dep);
-    console.log("1" + dep[0]);
-
-    formdata.append("uniID", uniID);
-    formdata.append("emailReg", emailReg);
-    formdata.append("passwordReg", passwordReg);
-    formdata.append("repasswordReg", repasswordReg);
-    
     axios
-      .post("http://localhost:3002/register", formdata, {
-        // Slast_name: lastName,
-        // universityID: uniID,
-        // depName: dep,
-        // Semail: emailReg,
-        // Spassword: passwordReg,
-        // rePassword: repasswordReg,
-
+      .post("http://localhost:5000/register", formdata, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
-        console.log("12244");
+      .then((response) => {
+        console.log("res is" + response);
 
         // then print response status
-        console.warn(res);
-        if (res.data.success === 1) {
+        console.warn(response);
+        if (response.status === 201) {
           setSuccess("Image upload successfully");
           console.log("Image upload successfully");
         }
+      });
+  };
+
+  const submit =  () => {
+    axios
+      .post("http://localhost:5000/register", {
+        Sfirst_name: Sfirst_name,
+        Slast_name: Slast_name,
+        universityID: universityID,
+        depName: depName,
+        Semail: Semail,
+        Spassword: Spassword,
+        rePassword:rePassword,
+        userInfo: userInfo.file,
+
+      })
+      .then((response) => {
+        console.log(response);
       });
   };
 
@@ -191,7 +194,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="uniId"
-                  value={uniID}
+                  value={universityID}
                   label="الرقم الجامعي"
                   autoFocus
                   onChange={(e) => {
@@ -242,7 +245,6 @@ export default function SignUp() {
                   onChange={(e) => {
                     var filter =
                       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
                     if (!filter.test(e.target.value)) {
                       alert("Please provide a valid email address");
                     } else {
@@ -292,7 +294,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Select
-                  options={dep}
+                  options={depName}
                   closeMenuOnSelect={false}
                   //  onChange={handleSelect}
                 />

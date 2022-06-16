@@ -1,15 +1,9 @@
 import "./rightbar.css";
-
-document.dir="rtl"; 
-
-
+document.dir = "rtl";
 
 export default function Rightbar({ profile }) {
   const HomeRightbar = () => {
-    return (
-      <>    
-      </>
-    );
+    return <></>;
   };
 
   const ProfileRightbar = () => {
@@ -22,8 +16,10 @@ export default function Rightbar({ profile }) {
             <span className="rightbarInfoValue">فلسطين </span>
           </div>
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">الدائرة :  </span>
-            <span className="rightbarInfoValue">الهندسة وتكنولوجيا المعلومات</span>
+            <span className="rightbarInfoKey">الدائرة : </span>
+            <span className="rightbarInfoValue">
+              الهندسة وتكنولوجيا المعلومات
+            </span>
           </div>
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">التخصص : </span>

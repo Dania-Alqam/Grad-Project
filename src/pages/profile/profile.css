@@ -1,50 +1,68 @@
-.profile{
-    display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Noto+Sans+Arabic:wght@300&display=swap');
+
+body {
+    margin-top: 20px;
+    color: #000000;
+    text-align: left;
+    background-color: #ffffff;
+    /* font-family: 'Cairo', sans-serif; */
+    /* font-family: 'Noto Sans Arabic', sans-serif !important; */
 }
 
-.profileRight{
-    flex: 9;
+.main-body {
+    padding: 15px;
+    font-family: 'Noto Sans Arabic', sans-serif !important;
+
 }
 
-.profileCover{
-    height: 320px;
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+.card {
     position: relative;
-}
-
-.profileCoverImg{
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.profileUserImg{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 150px;
-    border: 3px solid white;
-}
-
-.profileInfo{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
 }
 
-.profileInfoName{
-    font-size: 24px;
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
 }
 
-.profileInfoDesc{
-    font-weight: 300;
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
 }
 
-.profileRightBottom{
-    display: flex;
+.gutters-sm>.col, .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.mb-3, .my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+
+.mt-3 {
+    padding-top: 5px;
 }

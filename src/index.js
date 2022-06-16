@@ -11,6 +11,7 @@ import App from "./App";
 import SignUp from "./pages/register/Register";
 import SignInSide from "./pages/login/login";
 import Profile from "./pages/profile/Profile";
+import editProfile from "./pages/editProfile/editProfile";
 import Home from "./pages/home/Home";
 import DashboardLayout from "./Dashboard";
 import Navbar from "./components/Navbar/navbar"; 
@@ -45,6 +46,8 @@ render(
       <Route path="pages/professors/rateprof" element={<RatingForm />} />
       <Route path="pages/login/Login" element={<SignInSide />} />
       <Route path="pages/register/Register" element={<SignUp />} />
+      <Route path="pages/editProfile/editProfile" element={<editProfile />} />
+
     </Routes>
   </BrowserRouter>,
   rootElement
