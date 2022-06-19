@@ -20,7 +20,7 @@ import App from "../../components/Navbar/navbar";
 const mdTheme = createTheme();
 
 export default function RatingForm() {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState("");
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -79,9 +79,9 @@ export default function RatingForm() {
                   <Rating
                     size="large"
                     name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
+                    // value={value}
+                    onChange={(event) => {
+                      setValue(event.target.value);
                     }}
                   />
                 </Card>
@@ -140,7 +140,7 @@ export default function RatingForm() {
                     variant="h4"
                     color="red"
                   >
-                    أدخل تعليقاً
+                    ادخل تعليقًا{" "}
                   </Typography>
                   <Box
                     sx={{
@@ -159,7 +159,7 @@ export default function RatingForm() {
 
                 <Grid xs={12}>
                   <Button fullWidth variant="contained">
-                   <h3>أرسل</h3> 
+                    <h3>أرسل</h3>
                   </Button>
                 </Grid>
               </Grid>

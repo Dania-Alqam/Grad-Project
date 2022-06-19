@@ -10,8 +10,10 @@ import {
 import App from "./App";
 import SignUp from "./pages/register/Register";
 import SignInSide from "./pages/login/login";
+import SignInAdmin from "./pages/login/AdminLogin";
+import NewProduct from "./pages/newProduct/NewProduct";
 import Profile from "./pages/profile/Profile";
-import editProfile from "./pages/editProfile/editProfile";
+import Edit from "./pages/editProfile/editProfile";
 import Home from "./pages/home/Home";
 import DashboardLayout from "./Dashboard";
 import Navbar from "./components/Navbar/navbar"; 
@@ -25,8 +27,6 @@ import RatingForm from "./pages/professors/rateprof";
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import React, { lazy, Suspense } from "react";
 // const Begin = lazy(() => import("./pages/begin"));
-
-
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(Begin);
 
@@ -45,8 +45,11 @@ render(
       <Route path="pages/professors/detailedRate" element={<Dashboard />} />
       <Route path="pages/professors/rateprof" element={<RatingForm />} />
       <Route path="pages/login/Login" element={<SignInSide />} />
+      <Route path="pages/login/AdminLogin" element={<SignInAdmin />} />
       <Route path="pages/register/Register" element={<SignUp />} />
-      <Route path="pages/editProfile/editProfile" element={<editProfile />} />
+      <Route path="pages/editProfile/editProfile" element={<Edit/>} />
+      <Route path="pages/newProduct/newProduct" element={<NewProduct/>} />
+
 
     </Routes>
   </BrowserRouter>,

@@ -36,15 +36,16 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 // document.dir = "rtl";
 
 const theme = createTheme();
 
 export default function SignInSide() {
-  const [Semail, setEmail] = useState("");
-  const [Spassword, setPassword] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [error, setError] = useState("");
+
   // const [loginStatus, setloginStatus] = useState("");
 
   const validateEmail = (e) => {
@@ -57,25 +58,29 @@ export default function SignInSide() {
     }
   };
 
-  useEffect(() => {
-    console.log(Semail);
-    console.log(Spassword);
-  });
-
   const login = () => {
+    if (Email === "" || Password === "") {
+      setError("Fields are required");
+    }
     axios
-      .post("http://localhost:3002/login", {
-        Semail: Semail,
-        password: Spassword,
+      .post("http://localhost:5000/api/auth/student", {
+        Email: Email,
+        Password: Password,
       })
-      console.log(Semail)
-      // .then((response) => {
-      //   if (response.data.message) {
-      //     window.alert(response.data.message);
-      //   } else {
-      //    window.alert("successfully logged in");
-      //   }
-      // });
+      .then((response) => {
+        if (response.status === 200) {
+          //  this.props.history.push("../home/Home");
+          // window.location.reload();
+          window.alert(response.data.message);
+          // swal("Good job!", response.data.message, "success");
+          // swal("Hello world!");
+        }
+      });
+    //window.alert(response.data.message);
+    //   } else {
+    //    window.alert("successfully logged in");
+    //   }
+    // });
   };
 
   const handleSubmit = (event) => {
@@ -86,6 +91,12 @@ export default function SignInSide() {
       password: data.get("password"),
     });
   };
+
+  // const handleLogin = (event) => {
+  //   if (login.status == 200) {
+  //     console.log("we Logged In");
+  //   }
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -138,7 +149,7 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={Semail}
+                value={Email}
                 // onChange={(e) => validateEmail(e)}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -163,13 +174,14 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={Spassword}
+                value={Password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="تذكرني"
               />
+
               <Button
                 style={{
                   borderRadius: 35,
@@ -182,9 +194,11 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={login}
+                href="../home/Home"
               >
                 تسجيل الدخول
               </Button>
+
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -194,8 +208,23 @@ export default function SignInSide() {
                 <Grid item xs={12}>
                   <Link href="../register/Register" variant="body2">
                     {"ليس لديك حساب بعد ؟ أنشئ حسابًا"}
-                  </Link>
+                  </Link>{" "}
                 </Grid>
+                <Button
+                  style={{
+                    borderRadius: 35,
+                    backgroundColor: "#8cadac",
+                    padding: "10px 20px",
+                    fontSize: "12px",
+                    
+                  }}
+                  type="submit"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  href="./AdminLogin"
+                >
+                  تسجيل الدخول كمدير{" "}
+                </Button>
               </Grid>
 
               {/* <h1>{loginStatus} </h1> */}

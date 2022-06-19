@@ -3,15 +3,11 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./components/Navbar/Navbar.css";
 //  import htmlContent from './t.html';
 import { VscLoading } from "react-icons/vsc";
-
-
 import React, { lazy, Suspense } from "react";
 import "./index.css";
 import { render } from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-
 import SignUp from "./pages/register/Register";import CssBaseline from "@material-ui/core/CssBaseline";
-
 import SignInSide from "./pages/login/login";
 import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
@@ -98,7 +94,7 @@ export default function App() {
         <Link to= "/pages/professors/ratingSummary">Summary </Link>
         <Link to= "/pages/professors/detailedRate">Rating </Link>
         <Link to= "/pages/professors/rateprof">Rate professors </Link>
-     <Link to= "/pages/begin">***************** </Link>
+        <Link to= "/pages/begin">***************** </Link>
 
       </nav>
    </div>

@@ -95,8 +95,7 @@ export default function SignUp() {
     event.preventDefault();
     // const validation =validator.validate(this.state);
     // const data = new FormData(event.currentTarget);
-    console.log(event.target.lastName.value)
-   
+    console.log(event.target.lastName.value);
   };
 
   const [userInfo, setuserInfo] = useState({
@@ -114,12 +113,11 @@ export default function SignUp() {
 
   const [isSucces, setSuccess] = useState(null);
 
-  const sbmit = async () => {
+  const submit = async () => {
     console.log("The selected value is " + selectedValue);
     const formdata = new FormData();
-   formdata.append("avatar", userInfo.file);
+    formdata.append("avatar", userInfo.file);
     formdata.append("Sfirst_name", Sfirst_name);
-    console.log("First Name :"+Sfirst_name)
     formdata.append("Slast_name", Slast_name);
     formdata.append("depName", depName);
     formdata.append("universityID", universityID);
@@ -132,32 +130,12 @@ export default function SignUp() {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {
-        console.log("res is" + response);
-
         // then print response status
         console.warn(response);
         if (response.status === 201) {
           setSuccess("Image upload successfully");
           console.log("Image upload successfully");
         }
-      });
-  };
-
-  const submit =  () => {
-    axios
-      .post("http://localhost:5000/register", {
-        Sfirst_name: Sfirst_name,
-        Slast_name: Slast_name,
-        universityID: universityID,
-        depName: depName,
-        Semail: Semail,
-        Spassword: Spassword,
-        rePassword:rePassword,
-        userInfo: userInfo.file,
-
-      })
-      .then((response) => {
-        console.log(response);
       });
   };
 
@@ -324,7 +302,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // href="../home/Home"
+             //  href="../home/Home"
             >
               إنشاء حساب
             </Button>

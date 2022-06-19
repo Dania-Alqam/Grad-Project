@@ -185,85 +185,85 @@
 //   },
 // });
 
-app.post("/register", async (req, res) => {
-  try {
-     let upload = multer({ storage: storage }).single("avatar");
-    upload(req, res, function (err) {
-      const Sfirst_name = req.body.firstName;
-      const Slast_name = req.body.lastName;
-      const Semail = req.body.emailReg;
-      const Spassword =  req.body.passwordReg;     
-      const universityID = req.body.uniID;
-      const depName = req.body.dep;
+// app.post("/register", async (req, res) => {
+//   try {
+//      let upload = multer({ storage: storage }).single("avatar");
+//     upload(req, res, function (err) {
+//       const Sfirst_name = req.body.firstName;
+//       const Slast_name = req.body.lastName;
+//       const Semail = req.body.emailReg;
+//       const Spassword =  req.body.passwordReg;     
+//       const universityID = req.body.uniID;
+//       const depName = req.body.dep;
 
-      if (!req.file) {
-        return res.send("Please select an image to upload");
-      } else if (err instanceof multer.MulterError) {
-        return res.send(err);
-      } else if (err) {
-        return res.send(err);
-      }
-      const image = req.file.filename;
-      con.query(
-        "insert into student (Sfirst_name, Slast_name, Semail, Spassword, universityID, depName , image) VALUES (?,?,?,?,?,?,?)",
-        [Sfirst_name, Slast_name, Semail, Spassword, universityID, "cs", image],
-        (err, results) => {
-          if (err) {
-            throw err;
-          }
-          res.json({ success: 1 });
-        }
-      );
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
+//       if (!req.file) {
+//         return res.send("Please select an image to upload");
+//       } else if (err instanceof multer.MulterError) {
+//         return res.send(err);
+//       } else if (err) {
+//         return res.send(err);
+//       }
+//       const image = req.file.filename;
+//       con.query(
+//         "insert into student (Sfirst_name, Slast_name, Semail, Spassword, universityID, depName , image) VALUES (?,?,?,?,?,?,?)",
+//         [Sfirst_name, Slast_name, Semail, Spassword, universityID, "cs", image],
+//         (err, results) => {
+//           if (err) {
+//             throw err;
+//           }
+//           res.json({ success: 1 });
+//         }
+//       );
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 
 
-app.post("/register", async (req, res) => {
-    try {
-       let upload = multer({ storage: storage }).single("avatar");
-      upload(req, res, function (err) {
-        const Sfirst_name = req.body.Sfirst_name;
-        const Slast_name = req.body.Slast_name;
-        const Semail = req.body.Semail;
-        const Spassword = req.body.Spassword;
-        const universityID = req.body.universityID;
-        const depName = req.body.depName;
-        const rePassword = req.body.rePassword;
+// app.post("/register", async (req, res) => {
+//     try {
+//        let upload = multer({ storage: storage }).single("avatar");
+//       upload(req, res, function (err) {
+//         const Sfirst_name = req.body.Sfirst_name;
+//         const Slast_name = req.body.Slast_name;
+//         const Semail = req.body.Semail;
+//         const Spassword = req.body.Spassword;
+//         const universityID = req.body.universityID;
+//         const depName = req.body.depName;
+//         const rePassword = req.body.rePassword;
   
-        if (!req.file) {
-          return res.send("Please select an image to upload");
-        } else if (err instanceof multer.MulterError) {
-          return res.send(err);
-        } else if (err) {
-          return res.send(err);
-        }
-        const image = req.file.filename;
+//         if (!req.file) {
+//           return res.send("Please select an image to upload");
+//         } else if (err instanceof multer.MulterError) {
+//           return res.send(err);
+//         } else if (err) {
+//           return res.send(err);
+//         }
+//         const image = req.file.filename;
 
-        result = await UserSerivce.AddUser(
-            Sfirst_name,
-            Slast_name,
-            Semail,
-            Spassword,
-            rePassword,
-            universityID,
-            depName, 
-            image
-          );
-          if (result.Created) {
-            res.status(201).json({ message: result.message });
-          } else {
-            res.status(400).json({ message: result.message });
-          }
+//         result = await UserSerivce.AddUser(
+//             Sfirst_name,
+//             Slast_name,
+//             Semail,
+//             Spassword,
+//             rePassword,
+//             universityID,
+//             depName, 
+//             image
+//           );
+//           if (result.Created) {
+//             res.status(201).json({ message: result.message });
+//           } else {
+//             res.status(400).json({ message: result.message });
+//           }
        
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  });
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   });
 
 // const customFields = {
 //   usernameField: "email",

@@ -66,7 +66,7 @@ class Album extends Component {
     professors: [],
   };
   componentDidMount() {
-    const url = "http://localhost:3002/professorPage";
+    const url = "http://localhost:5000/getProf";
     axios
       .get(url)
       .then((response) => response.data)
@@ -116,59 +116,61 @@ class Album extends Component {
           <Container sx={{ py: 5 }} maxWidth="md" style={{ paddingTop: "0" }}>
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {this.state.professors.map((rs, index) => (
-                                    console.log("prof Name ISssssssssssssssssss :"+rs.profName),
-                                    console.log("prof Name ISssssssssssssssssss :"+rs.profImage),
-
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      sx={{
-                        pt: "50%",
-                      }}
-                      
-                      src={"http://localhost:3002/uploads/"+rs.profImage } 
-                      onError={(e)=>{e.target.onerror = null; e.target.src="http://localhost:3002/uploads/default.jpg"}}
-        
-                      alt="please"
-                      style={{ height: "200px", paddingTop: "0" }}
-                    />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {rs.profName}
-                    
-                      </Typography>
-                      <Typography gutterBottom variant="h6" component="div">
-                        {rs.contactInfo} <EmailIcon />
-                      </Typography>
-                      <Typography gutterBottom variant="h6" component="div">
-                        المكتب : {rs.officeID}
-                      </Typography>
-                      <Typography gutterBottom variant="h6" component="div">
-                        مش من البيز التقييم:{" "}
-                        <Rating
-                          name="size-small"
-                          defaultValue={3.8}
-                          size="small"
-                          readOnly
+              {this.state.professors.map(
+                (rs, index) => (
+                  (
+                    <Grid item key={index} xs={12} sm={6} md={4}>
+                      <Card
+                        sx={{
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          sx={{
+                            pt: "50%",
+                          }}
+                          src={"http://localhost:5000/imgs/" + rs.profImage}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src =
+                              "http://localhost:5000/imgs/default.jpg";
+                          }}
+                          alt="prof image"
+                          style={{ height: "200px", paddingTop: "0" }}
                         />
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button href="ratingSummary" size="small">
-                        عرض التقييم
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
+                        <CardContent sx={{ flexGrow: 1 }}>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {rs.profName}
+                          </Typography>
+                          <Typography gutterBottom variant="h6" component="div">
+                            {rs.contactInfo} <EmailIcon />
+                          </Typography>
+                          <Typography gutterBottom variant="h6" component="div">
+                            المكتب : {rs.officeID}
+                          </Typography>
+                          <Typography gutterBottom variant="h6" component="div">
+                            مش من البيز التقييم:{" "}
+                            <Rating
+                              name="size-small"
+                              defaultValue={3.8}
+                              size="small"
+                              readOnly
+                            />
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button href="ratingSummary" size="small">
+                            عرض التقييم
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  )
+                )
+              )}
             </Grid>
           </Container>
         </main>

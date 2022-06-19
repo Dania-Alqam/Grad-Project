@@ -2,9 +2,10 @@ var model = require("../Model/UserModel");
 
 var AuthUser = async function (Email, Password) {
   var user = await model.findUserByEmail(Email);
-  if (user == null) {
+  if (user == null || user.Spassword!=Password) {
     return {
       found: false,
+
     };
   } else {
     if (user.Spassword == Password) {

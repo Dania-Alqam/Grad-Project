@@ -1,4 +1,6 @@
 UserSerivce = require("../../Services/UserService");
+ StudentSerivce = require("../../Services/StudentService");
+
 
 module.exports = function (app) {
 
@@ -50,10 +52,11 @@ const storage = multer.diskStorage({
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-  app.post("/register", async (req, res) => {
+app.post("/register", async (req, res) => {
     try {
        let upload = multer({ storage: storage }).single("avatar");
       upload(req, res,async function (err) {
+        console.log(req.body.image);
         const Sfirst_name = req.body.Sfirst_name;
         const Slast_name = req.body.Slast_name;
         const Semail = req.body.Semail;
@@ -69,6 +72,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
         } else if (err) {
           return res.send(err);
         }      
+
         
       const image = req.file.filename;
 
@@ -100,18 +104,26 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
     }
   });
 
-
-
-  app.get("/fieldofinterest",async (req, res) => {
+app.get("/fieldofinterest",async (req, res) => {
     result= await UserSerivce.GetFOI();
     res.send(result);
   });
   
-   app.get("/department",async (req, res) => {
+ app.get("/department",async (req, res) => {
     result= await UserSerivce.GetDepartment();
     res.send(result);
 
   });
 
-  
+  app.get("/getStudent",async (req, res) => {
+    result= await StudentSerivce.GetStudent();
+    res.send(result);
+  });
+
+  app.get("/getProf",async (req, res) => {
+    result= await StudentSerivce.GetProf();
+    res.send(result);
+    console.log("proffff")
+
+  });
 };
