@@ -1,31 +1,24 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
-
 import Search from "./Search";
-import "./Navbar.css"
+import "./Navbar.css";
 
-
-
-
-document.body.style.textAlign="right";
+document.body.style.textAlign = "right";
 const App = () => {
-  
-  
-
   return (
-    <Navbar 
+    <Navbar
       collapseOnSelect
       expand="md"
       bg="dark"
       variant="dark"
       className="px-4 py-8"
       fixed="top"
-      
-
     >
       <Navbar.Brand>BZUSociety</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-na" />
-      <Navbar.Collapse id="responsive-navbar-nav">  <Nav className="ml-auto align-items-end px-3">
+      <Navbar.Collapse id="responsive-navbar-nav">
+        {" "}
+        <Nav className="ml-auto align-items-end px-3">
           <Search />
           {/* <Nav.Link className="pl-4">Cart</Nav.Link> */}
         </Nav>
@@ -37,9 +30,7 @@ const App = () => {
           <Nav.Link href="../professors/professorsPage"> المدرسين </Nav.Link>
           <Nav.Link href="">المكتبة</Nav.Link>
           <Nav.Link href="../login/Login">تسجيل الخروج</Nav.Link>
-          
         </Nav>
-      
       </Navbar.Collapse>
     </Navbar>
   );

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Noto+Sans+Arabic:wght@300&display=swap');
+
 .rightbar {
   flex: 3.5;
+
 }
 
 .rightbarWrapper {
@@ -29,7 +32,8 @@
 }
 
 .rightbarTitle{
-    margin-bottom: 20px;
+    margin-bottom: 20px;  font-family: 'Noto Sans Arabic', sans-serif !important;
+
 }
 
 .rightbarFriendList {

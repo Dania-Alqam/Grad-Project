@@ -1,33 +1,7 @@
 UserSerivce = require("../../Services/UserService");
- StudentSerivce = require("../../Services/StudentService");
-
+StudentSerivce=require("../../Services/StudentService")
 
 module.exports = function (app) {
-
-  // app.post("/register", async (req, res) => {
-  //   const Sfirst_name = req.body.Sfirst_name;
-  //   const Slast_name = req.body.Slast_name;
-  //   const Semail = req.body.Semail;
-  //   const Spassword = req.body.Spassword;
-  //   const universityID = req.body.universityID;
-  //   const depName = req.body.depName;
-  //   const rePassword = req.body.rePassword;
-
-  //   result = await UserSerivce.AddUser(
-  //     Sfirst_name,
-  //     Slast_name,
-  //     Semail,
-  //     Spassword,
-  //     rePassword,
-  //     universityID,
-  //     depName
-  //   );
-  //   if (result.Created) {
-  //     res.status(201).json({ message: result.message });
-  //   } else {
-  //     res.status(400).json({ message: result.message });
-  //   }
-  // });
 
 const multer = require("multer");
 const path = require("path");
@@ -52,11 +26,10 @@ const storage = multer.diskStorage({
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
-app.post("/register", async (req, res) => {
+  app.post("/register", async (req, res) => {
     try {
        let upload = multer({ storage: storage }).single("avatar");
       upload(req, res,async function (err) {
-        console.log(req.body.image);
         const Sfirst_name = req.body.Sfirst_name;
         const Slast_name = req.body.Slast_name;
         const Semail = req.body.Semail;
@@ -72,7 +45,6 @@ app.post("/register", async (req, res) => {
         } else if (err) {
           return res.send(err);
         }      
-
         
       const image = req.file.filename;
 
@@ -104,17 +76,18 @@ app.post("/register", async (req, res) => {
     }
   });
 
-app.get("/fieldofinterest",async (req, res) => {
+
+
+  app.get("/fieldofinterest",async (req, res) => {
     result= await UserSerivce.GetFOI();
     res.send(result);
   });
   
- app.get("/department",async (req, res) => {
+   app.get("/department",async (req, res) => {
     result= await UserSerivce.GetDepartment();
     res.send(result);
 
   });
-
   app.get("/getStudent",async (req, res) => {
     result= await StudentSerivce.GetStudent();
     res.send(result);
@@ -126,4 +99,5 @@ app.get("/fieldofinterest",async (req, res) => {
     console.log("proffff")
 
   });
+  
 };

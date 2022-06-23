@@ -2,10 +2,9 @@ var model = require("../Model/UserModel");
 
 var AuthUser = async function (Email, Password) {
   var user = await model.findUserByEmail(Email);
-  if (user == null || user.Spassword!=Password) {
+  if (user == null) {
     return {
       found: false,
-
     };
   } else {
     if (user.Spassword == Password) {
@@ -14,6 +13,12 @@ var AuthUser = async function (Email, Password) {
         Authenticated: true,
         ID: user.studentID,
       };
+    }
+    else {
+      return {
+        found: true,
+        Authenticated: false,
+      };  
     }
   }
 };

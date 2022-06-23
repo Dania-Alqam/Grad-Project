@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200&family=Noto+Sans+Arabic:wght@300&display=swap');
+
+
 .homeContainer{
     display: flex;
     width: 100%;
+    background: white;
+    font-family: 'Noto Sans Arabic', sans-serif !important;
+
 }
 
 

@@ -33,6 +33,7 @@ const theme = createTheme();
 
 export default function SignUp() {
   useEffect(() => {
+    console.log("hellohello")
     axios.get("http://localhost:5000/fieldofinterest", {}).then((response) => {
       console.log(response.data);
       const fi = response.data.map((T) => ({
