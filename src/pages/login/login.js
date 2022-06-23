@@ -18,6 +18,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import validator from "validator";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -45,6 +46,8 @@ export default function SignInSide() {
   const [Password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   // const [loginStatus, setloginStatus] = useState("");
 
@@ -68,9 +71,15 @@ export default function SignInSide() {
         Password: Password,
       })
       .then((response) => {
+        console.log(response.status);
         if (response.status === 200) {
-          //  this.props.history.push("../home/Home");
-          // window.location.reload();
+          console.log(Response);
+          localStorage.setItem("token", response.data.access_token);
+          var token = localStorage.getItem("token");
+          console.log("*******")
+          console.log(token)
+          navigate("/pages/home/Home",{replace:true})
+        
           window.alert(response.data.message);
           // swal("Good job!", response.data.message, "success");
           // swal("Hello world!");
@@ -194,7 +203,7 @@ export default function SignInSide() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={login}
-                href="../home/Home"
+                // href="../home/Home"
               >
                 تسجيل الدخول
               </Button>
@@ -216,7 +225,6 @@ export default function SignInSide() {
                     backgroundColor: "#8cadac",
                     padding: "10px 20px",
                     fontSize: "12px",
-                    
                   }}
                   type="submit"
                   variant="contained"
