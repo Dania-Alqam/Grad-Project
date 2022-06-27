@@ -18,7 +18,6 @@ findAdminByEmail = async function (Email) {
   );
   return result[0];
 };
-
 GetDepartment = async function () {
   result = await Executor.execute("SELECT depName FROM department");
   if (result == null) {
@@ -57,7 +56,7 @@ Save = async function (User) {
       "','" +
       User.uid +
       "','" +
-      "cs" +
+      User.depName +
       "','" +
       User.image +
       "')";

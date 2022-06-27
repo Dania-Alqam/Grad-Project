@@ -42,7 +42,7 @@ export default function Sidebar() {
                 المدراء
               </li>
             </Link>
-            <Link to="/newUser" className="link">
+            <Link to="../pages/newProduct/NewProduct" className="link">
               <li className="sidebarListItem">
                 <PersonAdd className="sidebarIcon" />
                 إضافة مدير جديد 
@@ -54,10 +54,10 @@ export default function Sidebar() {
                 المعلمون
               </li>
             </Link>
-            <Link to="/newProduct" className="link">
+            <Link to="../pages/newProfessor/NewProfessor" className="link">
               <li className="sidebarListItem">
                 <PersonAdd className="sidebarIcon" />
-                إضافة معلم جديد 
+                إضافة مدرس جديد 
               </li>
             </Link>
            
@@ -77,7 +77,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
-          <Link to="/posts" className="link">
+          <Link to="../pages/AdminApproval/AdminApproval" className="link">
             <li className="sidebarListItem">
               <PostAddTwoTone className="sidebarIcon" />
               إدارة المنشورات

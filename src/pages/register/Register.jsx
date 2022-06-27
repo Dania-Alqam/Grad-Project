@@ -9,24 +9,16 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Select from "react-select";
+//import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validator from "validator";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 document.dir = "rtl";
-
-// export const fieldOfInterests = [
-//   { value: "programming", label: "البرمجة", color: "#00B8D9", isFixed: true },
-//   { value: "accounting", label: "محاسبة", color: "#0052CC" },
-//   { value: "arch", label: "معماري", color: "#5243AA" },
-//   { value: "pole", label: "السياسة", color: "#FF5630", isFixed: true },
-//   { value: "business", label: "إدارة الأعمال", color: "#FF8B00" },
-// ];
-
-// const fieldOfInterests = ["Saab", "Volvo", "BMW"];
 
 const animatedComponents = makeAnimated();
 const theme = createTheme();
@@ -45,6 +37,7 @@ export default function SignUp() {
       setFields(fi);
     });
   }, []);
+
 
   useEffect(() => {
     axios.get("http://localhost:5000/department", {}).then((response) => {
@@ -71,6 +64,10 @@ export default function SignUp() {
   const [Spassword, setPasswordReg] = useState("");
   const [rePassword, setrePasswordReg] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
+
+
+  const [selectedDepValue, setSelectedDepValue] = useState("");
+
   // const register = () => {
   //   axios
   //     .post("http://localhost:3002/register", {
@@ -87,9 +84,9 @@ export default function SignUp() {
   //     });
   // };
 
-  const handleSelect = (event) => {
-    console.log("event is " + event.target.value);
-    setSelectedValue(event.target.value);
+  const handleDepSelect = (event) => {
+    console.log("event is .................." + event.target.value);
+    setSelectedDepValue(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -120,7 +117,7 @@ export default function SignUp() {
     formdata.append("avatar", userInfo.file);
     formdata.append("Sfirst_name", Sfirst_name);
     formdata.append("Slast_name", Slast_name);
-    formdata.append("depName", depName);
+    formdata.append("selectedDepValue", selectedDepValue);
     formdata.append("universityID", universityID);
     formdata.append("Semail", Semail);
     formdata.append("Spassword", Spassword);
@@ -134,12 +131,11 @@ export default function SignUp() {
         // then print response status
         console.warn(response);
         if (response.status === 201) {
-          setSuccess("Image upload successfully");
-          console.log("Image upload successfully");
+          setSuccess("you have successfully registered ");
+          console.log("you have successfully registered ");
         }
       });
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -264,19 +260,46 @@ export default function SignUp() {
 
               <Grid item xs={12} sm={6}>
                 <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  // defaultValue={[fieldOfInterests[4], fieldOfInterests[5]]}
-                  isMulti
-                  options={fields}
-                />
+                  Value={"Hello"}
+                  label="Fields of intrests"
+
+                // closeMenuOnSelect={false}
+                //  components={animatedComponents}
+                // defaultValue={[fieldOfInterests[4], fieldOfInterests[5]]}
+                //  isMulti
+                //  options={fields}
+                >
+
+                  <MenuItem value="">
+                    <em>--اختر المساق--</em>
+                  </MenuItem>
+                  {fields.map((f) => (
+                    <MenuItem value={f.value}>
+                      {f.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Select
-                  options={depName}
-                  closeMenuOnSelect={false}
-                  //  onChange={handleSelect}
-                />
+                  // value={this.state.value}
+                  //  closeMenuOnSelect={true}
+                  onChange={handleDepSelect}
+                >
+                  {depName.map((dep) => (
+                    <MenuItem value={dep.value}>
+                      {dep.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+
+                {/* <select closeMenuOnSelect={true} onChange={handleDepSelect}>
+                  {depName.map((dep) => (
+                    <option value={dep.value}>
+                      {dep.label}
+                    </option>
+                  ))}
+                </select> */}
               </Grid>
             </Grid>
 
@@ -303,7 +326,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-             //  href="../home/Home"
+            //  href="../home/Home"
             >
               إنشاء حساب
             </Button>

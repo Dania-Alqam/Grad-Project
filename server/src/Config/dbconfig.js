@@ -4,7 +4,7 @@ var config = {
   host: "localhost",
   user: "root",
   password: "1234",
-  database: "bzusociety",
+  database: "saeed",
   multipleStatements: true
 };
 

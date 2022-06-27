@@ -10,12 +10,20 @@ import Paper from '@mui/material/Paper';
 import { Divider, Rating } from '@mui/material';
 import { cyan } from '@mui/material/colors';
 import App from "../../components/Navbar/navbar";
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
-document.body.style.direction="rtl";
+
 const mdTheme = createTheme();
+const dificulty = [
+    {v:15, d:'سهل جداً'},
+    {v:5, d:'سهل'},
+    {v:7, d:'متوسط'},
+    {v:1, d:'صعب'},
+    {v:1, d:'صعب جداً'}
+];
 
+  
 function DashboardContent() {
-    document.body.style.textAlign="right";
 
 
     return (
@@ -58,33 +66,24 @@ function DashboardContent() {
                                             مستوى الصعوبة
                                         </Typography>
                                         <Divider />
-                                        <Typography sx={{ paddingTop: 2 }} component="h4" variant="h5" color="text.secondary">
-                                            سهل
-                                        </Typography>
-                                        <Rating
-                                            name="read-only"
-                                            value={4}
-                                            readOnly
-                                            size='large'
-                                        />
-                                        <Typography component="h4" variant="h5" color="text.secondary">
-                                            متوسط
-                                        </Typography>
-                                        <Rating
-                                            name="read-only"
-                                            value={3}
-                                            readOnly
-                                            size='large'
-                                        />
-                                        <Typography component="h4" variant="h5" color="text.secondary">
-                                            صعب
-                                        </Typography>
-                                        <Rating
-                                            name="read-only"
-                                            value={1.5}
-                                            readOnly
-                                            size='large'
-                                        />
+                                        
+ <Box sx={{mt:2.5}}>
+    {dificulty.map((i) => (
+                                                <>
+                                                    <Typography>
+                                                        {i.d}
+                                                    </Typography>
+                                                    <ProgressBar striped variant="info" now={i.v} label={i.v} />
+                                                </>
+                                            ))}
+
+
+
+</Box>
+
+
+
+
                                     </Box>
                                 </Paper>
                             </Grid>
@@ -119,9 +118,12 @@ function DashboardContent() {
                                     <Typography component="h4" variant="h5" color={cyan[700]}>
                                         هل تدرس مرة أخرى مع هذا المدرس ؟
                                     </Typography>
-                                    <Typography component="h4" variant="h5" color="text.secondary">
-                                        نعم : 60%
+                                    <Container> 
+                                    <Typography component="h5" variant="h6" color="text.secondary">
+                                       نعم : 60%
                                     </Typography>
+{/*                                     <ProgressBar striped variant="info" now={60} label ={60} />
+ */}                                    </Container>
                                     <Typography component="h4" variant="h5" color="text.secondary">
                                         لا : 40%
                                     </Typography>

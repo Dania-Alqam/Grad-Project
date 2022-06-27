@@ -35,8 +35,11 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
         const Semail = req.body.Semail;
         const Spassword = req.body.Spassword;
         const universityID = req.body.universityID;
-        const depName = req.body.depName;
+        const depName = req.body.selectedDepValue;
         const rePassword = req.body.rePassword;
+
+        console.log(req.body.selectedDepValue)
+
 
        if (!req.file) {
           return res.send("Please select an image to upload");
@@ -48,10 +51,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
         
       const image = req.file.filename;
 
-/*  if (response.status === 201) {
-            setSuccess("Image upload successfully");
-            console.log("Image upload successfully");
-          } */
         result = await UserSerivce.AddUser(
             Sfirst_name,
             Slast_name,
@@ -62,8 +61,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
             depName, 
             image
           );
-          console.log(universityID);
-          console.log(image);
           if (result.Created) {
             res.status(201).json({ message: result.message });
           } else {

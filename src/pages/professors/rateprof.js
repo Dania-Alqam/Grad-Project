@@ -11,20 +11,49 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { Button, Card, Divider, FormControlLabel, Rating } from "@mui/material";
+import { Button, Card, Divider, FormControlLabel } from "@mui/material";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import TextField from "@mui/material/TextField";
 import App from "../../components/Navbar/navbar";
+import { MDBContainer, MDBRating } from 'mdbreact';
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import Rating, { IconContainerProps } from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
 
 const mdTheme = createTheme();
 
+const label1 = {
+  1: 'سيء جداً',
+  2: 'سيء',
+  3: 'جيد',
+  4: 'جيد جداً',
+  5: 'رائع',
+};
+const label2 = {
+  1: 'سهل جداً',
+  2: 'سهل',
+  3: 'متوسط',
+  4: 'صعب',
+  5: 'صعب جداً',
+};
+function getrateLabelText(value1) {
+  return `${value1} Star${value1 !== 1 ? 's' : ''}, ${label1[value1]}`;
+}
+
+function getdifficultyLabelText(value1) {
+  return `${value1} Star${value1 !== 1 ? 's' : ''}, ${label2[value1]}`;
+}
+
 export default function RatingForm() {
+
   const [value, setValue] = React.useState("");
+  const [value1, setValue1] = React.useState(2);
+  const [hover, setHover] = React.useState(-1);
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <App />
+     
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Box
@@ -77,13 +106,23 @@ export default function RatingForm() {
                     تقييم المدرس
                   </Typography>
                   <Rating
+                  
+                    sx={{ justifyContent: 'flex-end' }}
                     size="large"
-                    name="simple-controlled"
-                    // value={value}
-                    onChange={(event) => {
-                      setValue(event.target.value);
+                    name="hover-feedback"
+                    value1={value1}
+                    getrateLabelText={getrateLabelText}
+                    onChange={(event, newValue1) => {
+                      setValue1(newValue1);
                     }}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                   />
+                  {value1 !== null && (
+                    <Box sx={{ ml: 2 }}>{label1[hover !== -1 ? hover : value1]}</Box>
+                  )}
                 </Card>
                 <Divider sx={{ paddingBottom: 3 }} />
 
@@ -124,12 +163,21 @@ export default function RatingForm() {
                   </Typography>
                   <Rating
                     size="large"
-                    name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
+                    name="hover-feedback"
+                    value1={value1}
+                    getdifficultyLabelText={getdifficultyLabelText}
+                    onChange={(event, newValue1) => {
+                      setValue1(newValue1);
                     }}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                   />
+                  {value1 !== null && (
+                    <Box sx={{ ml: 2 }}>{label2[hover !== -1 ? hover : value1]}</Box>
+                  )}
+                  
                 </Card>
                 <Divider sx={{ paddingBottom: 3 }} />
 
@@ -144,7 +192,7 @@ export default function RatingForm() {
                   </Typography>
                   <Box
                     sx={{
-                      width: 500,
+
                       maxWidth: "100%",
                     }}
                   >
@@ -169,6 +217,7 @@ export default function RatingForm() {
       </Box>
     </ThemeProvider>
   );
+  
 }
 
 function BasicSelect() {

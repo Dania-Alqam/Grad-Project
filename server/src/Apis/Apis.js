@@ -10,5 +10,7 @@ require("./Posts/Posts")(app);
 require("./Posts/approvePost")(app);
 require("./Reviews/addReview")(app);
 require("./images/imgs")(app);
+require("./Admin/AddProf")(app);
+require("./Reviews/getReviews")(app);
 
 }

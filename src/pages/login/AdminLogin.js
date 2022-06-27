@@ -19,6 +19,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import validator from "validator";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
+
 
 function Copyright(props) {
   return (
@@ -46,6 +48,8 @@ export default function SignInAdmin() {
   const [Password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   // const [loginStatus, setloginStatus] = useState("");
 
@@ -69,7 +73,22 @@ export default function SignInAdmin() {
         Password: Password,
       })
       .then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          console.log("if")
+          localStorage.setItem("token", response.data.admin_access_token);
+          var token = localStorage.getItem("token");
+          console.log(token)
+          navigate("../../components/Adminsidebar/AdminSidebar",{replace:true})
           window.alert(response.data.message);
+
+          // swal("Good job!", response.data.message, "success");
+          // swal("Hello world!");
+        }
+        else if(response.status === 401){
+          console.log("else")
+          window.alert("Check Your Email or Password")
+        }
       });
     //window.alert(response.data.message);
     //   } else {
@@ -189,7 +208,6 @@ export default function SignInAdmin() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 onClick={login}
-                 href="../newProduct/newProduct"
               >
                 تسجيل الدخول
               </Button>

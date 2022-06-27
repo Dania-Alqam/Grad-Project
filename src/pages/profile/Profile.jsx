@@ -149,7 +149,7 @@ export default function Profile() {
                     <div class="col-sm-3">
                       <h6 class="mb-0">مجالات الاهتمام</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">dl,ldl </div>
+                    <div class="col-sm-9 text-secondary">السياسة , الدين</div>
                   </div>
                   <hr
                   // style={{

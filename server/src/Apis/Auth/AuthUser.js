@@ -33,9 +33,9 @@ module.exports = function (app) {
     if (result.found == true && result.Authenticated) {
       var token = jwt.sign({ ID: result.ID, role: "a" }, secrets.SecretKey);
       res.status(200)
-        .json({ message: "Logged In Successfully" });
+        .json({ message: "Logged In Successfully" ,admin_access_token: token});
     } else {
-      res.status(401).json({ messages: "Wrong Email Or Password" ,admin_access_token: token});
+      res.status(401).json({ messages: "Wrong Email Or Password" });
     }
   });
   

@@ -103,7 +103,7 @@ export default function Begin() {
         </ion-row>
 
         <Button class="button" component={Link} to={"pages/register/Register"}>
-          سجّل معنا
+          !يلا سجّل معنا
         </Button>
       </div>
       <div class="size">
@@ -120,7 +120,7 @@ export default function Begin() {
               color="medium"
               class="ion-color ion-color-medium md hydrated"
             >
-              <h6>بحاجة موقع تلاقي فيه كل ما تحتاجه في جامعتك؟</h6>
+              <h6>ويوفّرلك كل المعلومات الي بتحتاجها عن دكاتركتك؟</h6>
             </ion-text>
           </ion-col>
         </ion-row>
