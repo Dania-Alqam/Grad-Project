@@ -96,5 +96,14 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
     console.log("proffff")
 
   });
+
+
+  app.get("/getCourses/:profID",async (req, res) => {
+    var profID = req.params.profID;
+    result= await StudentSerivce.getcourses(profID);
+    res.send(result);
+    console.log("courses")
+
+  });
   
 };

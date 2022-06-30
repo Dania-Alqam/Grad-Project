@@ -5,6 +5,7 @@ var jwt = require("jsonwebtoken");
 var secrets = require("../../Config/Secrets");
 
 module.exports = async function(app) {
+    
     app.post("/currentStudent", async (req,res) => { 
         console.log("AGS");
         if (req.body.access_token==null) {

@@ -18,7 +18,7 @@ module.exports = function (app) {
       res.status(200)
         .json({ message: "Logged In Successfully",access_token: token });
     } else {
-      res.status(401).json({ messages: "Wrong Email Or Password" });
+      res.status(400).json({ messages: "Wrong Email Or Password" });
     }
   });
 

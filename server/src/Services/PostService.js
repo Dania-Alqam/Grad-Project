@@ -27,15 +27,23 @@ var posts = await PostModel.getAllPostsNotApprovedByAdminID(adminID);
 return posts;
 }
 
+var getApprovedPosts = async function() {
+  var posts = await PostModel.getAllPostsApprovedByAdminID();
+  return posts;
+  }
+  
+
 var ApprovePost = async function(adminID, postID) {
 var status = await PostModel.approve(adminID,postID);
 return status;
 }
+
 module.exports = {
   AddPost: AddPost,
   DeletePost: DeletePost,
   getNotApprovedPosts: getNotApprovedPosts,
-  ApprovePost: ApprovePost
+  ApprovePost: ApprovePost,
+  getApprovedPost:getApprovedPosts,
 };
 
 

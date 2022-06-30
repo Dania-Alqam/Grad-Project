@@ -28,13 +28,17 @@ AddReview = async function (
     "', '" +
     diffLevel +
     "')";
+    console.log(query)
   await Executor.execute(query);
 };
+
 getReviewForProfessor = async function (profID) {
   var query = "Select rating from review WHERE profID='" + profID + "'";
   var result = await Executor.execute(query);
   var query2 =
     "Select profName from professorprofile WHERE profID='" + profID + "'";
+    console.log(query)
+    console.log(query2)
 //   var name = await Executor.execute(query2)[0].profName;
    var res2 = await Executor.execute(query2);
    var name=res2[0].profName
@@ -66,6 +70,15 @@ console.log(name)
   if (count == 0) {
     return {
       status: false,
+      avg: avg,
+      stars5: stars5,
+      stars4: stars4,
+      stars3: stars3,
+      stars2: stars2,
+      stars1: stars1,
+      count: count,
+      name:name
+      
     };
   } else {
     var avg = sum / count;
@@ -89,7 +102,15 @@ var getSummary = async function (profID) {
     "Select attendence, studyagain, difficultyLevel, opinion from review where profID = '" +
     profID +
     "'";
+
+    var query2 =
+    "Select profName from professorprofile WHERE profID='" + profID + "'";
+    console.log(query2)
+
   var result = await Executor.execute(query);
+  var res2 = await Executor.execute(query2);
+  var name=res2[0].profName
+
   count = 0;
   (diff1 = 0), (diff2 = 0), (diff3 = 0), (diff4 = 0), (diff5 = 0);
   var attendence = 0,
@@ -118,6 +139,17 @@ var getSummary = async function (profID) {
   if (count == 0) {
     return {
       status: false,
+      //opinions: opinions,
+      // attendencePercent: attendencePercent,
+      // notAttendencePercent: notAttendencePercent,
+      // studyagainPercent: studyagainPercent,
+      // notstudyagainPercent: notstudyagainPercent,
+      // diff1: diff1,
+      // diff2: diff2,
+      // diff3: diff3,
+      // diff4: diff4,
+      // diff5: diff5,
+      name:name
     };
   }
   var attendencePercent = Math.round(attendence / count);
@@ -139,8 +171,10 @@ var getSummary = async function (profID) {
     diff3: diff3,
     diff4: diff4,
     diff5: diff5,
+    name:name
   };
 };
+
 module.exports = {
   AddReview: AddReview,
   getReviewForProfessor: getReviewForProfessor,

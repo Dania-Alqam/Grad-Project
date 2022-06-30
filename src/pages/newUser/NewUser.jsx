@@ -1,40 +1,65 @@
 import "./newUser.css";
-
-export default function NewUser() {
+import Sidebar from "../../components/Adminsidebar/AdminSidebar";
+import { Toolbar } from "@mui/material";
+export default function NewUser(){
+return(
+<Sidebar param = {<NewUser1/>}/>
+);
+}
+ function NewUser1() {
   return (
-    <div className="newUser">
-      <h1 className="newUserTitle">إضافة مدير جديد</h1>
-      <form className="newUserForm">
-      
-        <div className="newUserItem">
-          <label>الإسم الكامل</label>
-          <input type="text" placeholder="John Smith" />
-        </div>
-        <div className="newUserItem">
-          <label>الإيميل</label>
-          <input type="email" placeholder="john@gmail.com" />
-        </div>
-        <div className="newUserItem">
-          <label>كلمة السر</label>
-          <input type="password" placeholder="password" />
-        </div>
-        <div className="newUserItem">
-          <label>رقم الهاتف</label>
-          <input type="text" placeholder="+972 592-774-938" />
-        </div>
-        <div className="newUserItem">
-          <label>اسم الدائرة</label>
-          <select className="newUserSelect" name="active" id="active">
-           
-          </select>
+    <div className="newProduct">
+      <Toolbar/>
+      <h1 className="addProductTitle">إضافة مسؤول جديد</h1>
+      <div className="addProductForm">
+        <div className="addProductItem">
+          <label>صورة الملف الشخصي</label>
+          <input type="file" id="file"  />
         </div>
         <div className="addProductItem">
-          <label>صورة البروفايل</label>
-          <input type="file" id="file" />
+          <label>الاسم الكامل</label>
+          <input
+            type="text"
+            placeholder="اسم المسؤول"
+            
+          />
         </div>
-       
-        <button className="newUserButton">إضافة</button>
-      </form>
+        <div className="addProductItem">
+          <label>معلومات التواصل </label>
+          <input
+            type="text"
+            placeholder="البريد الإلكتروني"
+           
+          />
+        </div>
+        <div className="addProductItem">
+          <label>كلمة السر </label>
+          <input
+            type="text"
+            placeholder="كلمة السر "
+           
+          />
+        </div>
+        <div className="addProductItem">
+          <label>رقم الهاتف</label>
+          <input
+            type="text"
+            placeholder="رقم الهاتف"
+           
+          />
+        </div>
+        <div className="addProductItem">
+          <label>اسم الدائرة</label>
+          <input
+            type="text"
+            placeholder="الدائرة"
+            
+          />
+        </div>
+        <button className="addProductButton" >
+          إضافة مسؤول
+        </button>
+      </div>
     </div>
   );
 }

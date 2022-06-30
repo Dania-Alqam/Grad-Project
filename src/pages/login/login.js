@@ -48,7 +48,6 @@ export default function SignInSide() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-
   // const [loginStatus, setloginStatus] = useState("");
 
   const validateEmail = (e) => {
@@ -65,7 +64,9 @@ export default function SignInSide() {
     if (Email === "" || Password === "") {
       setError("Fields are required");
     }
-    axios
+
+    
+      axios
       .post("http://localhost:5000/api/auth/student", {
         Email: Email,
         Password: Password,
@@ -76,20 +77,12 @@ export default function SignInSide() {
           console.log(Response);
           localStorage.setItem("token", response.data.access_token);
           var token = localStorage.getItem("token");
-          console.log("*******")
-          console.log(token)
-          navigate("/pages/home/Home",{replace:true})
-        
+          console.log("*******");
+          console.log(token);
+          navigate("/pages/home/Home", { replace: true });
           window.alert(response.data.message);
-          // swal("Good job!", response.data.message, "success");
-          // swal("Hello world!");
-        }
+        } 
       });
-    //window.alert(response.data.message);
-    //   } else {
-    //    window.alert("successfully logged in");
-    //   }
-    // });
   };
 
   const handleSubmit = (event) => {

@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import Search from "./Search";
 import "./Navbar.css";
+// import LogoutIcon from '@mui/icons-material/Logout';
 
 document.body.style.textAlign = "right";
 const App = () => {
@@ -24,11 +25,10 @@ const App = () => {
         </Nav>
         <Nav className="mr-auto align-items-end px-3">
           <Nav.Link href="../profile/Profile">حسابي</Nav.Link>
-          <Nav.Link href="../login/Login">من نحن</Nav.Link>
-
+          {/* <Nav.Link href="../login/Login">من نحن</Nav.Link> */}
           <Nav.Link href="../home/Home">الصفحة الرئيسية</Nav.Link>
           <Nav.Link href="../professors/professorsPage"> المدرسين </Nav.Link>
-          <Nav.Link href="">المكتبة</Nav.Link>
+          <Nav.Link href="../library/courseViewer">المكتبة</Nav.Link>
           <Nav.Link href="../login/Login">تسجيل الخروج</Nav.Link>
         </Nav>
       </Navbar.Collapse>

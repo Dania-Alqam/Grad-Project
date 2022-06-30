@@ -40,7 +40,8 @@ module.exports = function (app) {
           var decoded = jwt.verify(req.body.access_token, secrets.SecretKey);
           var studentID = decoded.ID;
           var status = await PostService.AddPost(content, studentID,postImage);
-          if (status.Added == true) res.sendStatus(201);
+          if (status.Added == true) 
+          res.sendStatus(201);
           else res.sendStatus(400);
         }
       });

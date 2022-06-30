@@ -16,8 +16,8 @@ import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validator from "validator";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 document.dir = "rtl";
 
 const animatedComponents = makeAnimated();
@@ -25,7 +25,6 @@ const theme = createTheme();
 
 export default function SignUp() {
   useEffect(() => {
-    console.log("hellohello")
     axios.get("http://localhost:5000/fieldofinterest", {}).then((response) => {
       console.log(response.data);
       const fi = response.data.map((T) => ({
@@ -38,7 +37,6 @@ export default function SignUp() {
     });
   }, []);
 
-
   useEffect(() => {
     axios.get("http://localhost:5000/department", {}).then((response) => {
       const dep = response.data.map((T) => ({
@@ -47,9 +45,7 @@ export default function SignUp() {
         color: "#5243AA",
       }));
       setdep(dep);
-      console.log(
-        "*************************************************************"
-      );
+
       console.log("hffffF" + dep[0].value);
       console.log("hjhnnhF" + dep);
     });
@@ -64,7 +60,6 @@ export default function SignUp() {
   const [Spassword, setPasswordReg] = useState("");
   const [rePassword, setrePasswordReg] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
-
 
   const [selectedDepValue, setSelectedDepValue] = useState("");
 
@@ -122,7 +117,6 @@ export default function SignUp() {
     formdata.append("Semail", Semail);
     formdata.append("Spassword", Spassword);
     formdata.append("rePassword", rePassword);
-
     axios
       .post("http://localhost:5000/register", formdata, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -131,11 +125,12 @@ export default function SignUp() {
         // then print response status
         console.warn(response);
         if (response.status === 201) {
-          setSuccess("you have successfully registered ");
-          console.log("you have successfully registered ");
+          setSuccess("you have successfully registered");
+          window.alert("you have successfully registered ");
         }
       });
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -263,20 +258,17 @@ export default function SignUp() {
                   Value={"Hello"}
                   label="Fields of intrests"
 
-                // closeMenuOnSelect={false}
-                //  components={animatedComponents}
-                // defaultValue={[fieldOfInterests[4], fieldOfInterests[5]]}
-                //  isMulti
-                //  options={fields}
+                  // closeMenuOnSelect={false}
+                  //  components={animatedComponents}
+                  // defaultValue={[fieldOfInterests[4], fieldOfInterests[5]]}
+                  //  isMulti
+                  //  options={fields}
                 >
-
                   <MenuItem value="">
                     <em>--اختر المساق--</em>
                   </MenuItem>
                   {fields.map((f) => (
-                    <MenuItem value={f.value}>
-                      {f.label}
-                    </MenuItem>
+                    <MenuItem value={f.value}>{f.label}</MenuItem>
                   ))}
                 </Select>
               </Grid>
@@ -287,9 +279,7 @@ export default function SignUp() {
                   onChange={handleDepSelect}
                 >
                   {depName.map((dep) => (
-                    <MenuItem value={dep.value}>
-                      {dep.label}
-                    </MenuItem>
+                    <MenuItem value={dep.value}>{dep.label}</MenuItem>
                   ))}
                 </Select>
 
@@ -326,7 +316,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            //  href="../home/Home"
+              //  href="../home/Home"
             >
               إنشاء حساب
             </Button>

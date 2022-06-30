@@ -15,6 +15,7 @@ var student = {
 };
 return student;
 }
+
 var viewProfInfo = async function () {
     result = await Executor.execute(
       "SELECT * FROM `professorprofile`",
@@ -22,8 +23,16 @@ var viewProfInfo = async function () {
     return result;
   };
 
+var getcourses = async function (profID) {
+    result = await Executor.execute(
+      "SELECT courseID FROM `prof2teachcourse` where profID='"+profID+ "'",
+    );
+    return result;
+  };
+
 module.exports = {
     getStudentById: getStudentById,
     viewProfInfo:viewProfInfo,
-
+    getcourses:getcourses,
+  
 }

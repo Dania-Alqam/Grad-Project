@@ -48,9 +48,7 @@ export default function RatingSummary() {
   //       href: "detailedRate",
   //     },
   //   ];
-
   const { profID } = useParams();
-
   const [profName, setProfName] = useState("");
   const [avg, setavg] = useState("");
   const [stars1, setstars1] = useState("");
@@ -61,9 +59,9 @@ export default function RatingSummary() {
   const [count, setCount] = useState("");
 
   useEffect(() => {
-    // const { profID } = useParams();
     const url = "http://localhost:5000/profs/" + profID + "/getReview";
     axios.get(url).then((response) => {
+      console.log(response.data)
       setProfName(response.data.name);
       setavg(response.data.avg);
       setstars1(response.data.stars1);
@@ -71,16 +69,12 @@ export default function RatingSummary() {
       setstars3(response.data.stars3);
       setstars4(response.data.stars4);
       setstars5(response.data.stars5);
-      console.log(response.data);
-      console.log(stars3);
-      console.log(stars1);
-
-      console.log(avg);
       setCount(response.data.count);
     });
   }, []);
 
   const [value, setValue] = React.useState(2);
+
   return (
     <React.Fragment>
       <GlobalStyles
@@ -133,12 +127,95 @@ export default function RatingSummary() {
             item
             key="التقييم الكلي"
             xs={12}
-            sm={ 6}
+            sm={"التقييم الكلي" === 'التقييم الكلي' ? 12 : 6}
             md={4}
           >
             <Card>
               <CardHeader
                 title="التقييم الكلي"
+                titleTypographyProps={{ align: "center" }}
+                sx={{
+                  backgroundColor: (theme) =>
+                    theme.palette.mode === "light"
+                      ? theme.palette.grey[200]
+                      : theme.palette.grey[700],
+                }}
+              />
+              <CardContent>
+                {/* {avg ?  */}
+                  <Box sx={{ mb: 2.5 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "baseline",
+                      }}
+                    >
+                      <Typography variant="h6" color="text.secondary">
+                        5/
+                      </Typography>
+                      <Typography component="h1" variant="h3" color="Red">
+                        {avg}
+                      </Typography>
+                    </Box>
+                    <Typography component="h9" color="text.secondary">
+                      اعتماداً على {count} تقييماً
+                    </Typography>
+                  </Box>
+                 <ul></ul>
+               
+                {"التقييم الكلي" === "التقييم الكلي" ? 
+                  <Box>
+                    <ul>
+                      <Typography 
+                      component="h1"
+                       variant="name1"
+                       align="center"
+                       >
+                        {profName}
+                      </Typography>
+                    </ul>
+                  </Box>
+                 : 
+                 <Box>
+                    {/* {tier.content.map((i) => ( */}
+                    <>
+                      <Typography>رائع </Typography>
+                      <ProgressBar striped variant="info" now={stars5*10} label={stars5} />
+                      <Typography>جيد جدًا</Typography>
+                      <ProgressBar striped variant="info" now={stars4*10} label={stars4} />
+
+                      <Typography>جيد</Typography>
+                      <ProgressBar striped variant="info" now={stars3*10} label={stars3} />
+
+                      <Typography>سيئ</Typography>
+                      <ProgressBar striped variant="info" now={stars2*10} label={stars2} />
+
+                      <Typography>سيئ جدًا</Typography>
+                      <ProgressBar striped variant="info" now={stars1*10} label={stars1} />
+                    </>                
+                  </Box>
+                  }
+                
+              </CardContent>
+              <CardActions>
+                <Button href="rateprof" fullWidth variant="contained">
+                  قيّم المدرس
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+
+          <Grid
+            item
+            key="تقييم المدرس"
+            xs={12}
+            sm={ 6}
+            md={4}
+          >
+            <Card>
+              <CardHeader
+                title="التقييم المدرس"
                 titleTypographyProps={{ align: "center" }}
                 sx={{
                   backgroundColor: (theme) =>
@@ -187,13 +264,10 @@ export default function RatingSummary() {
                       <ProgressBar striped variant="info" now={stars5} label={stars5} />
                       <Typography>جيد جدًا</Typography>
                       <ProgressBar striped variant="info" now={stars4} label={stars4} />
-
                       <Typography>جيد</Typography>
                       <ProgressBar striped variant="info" now={stars3} label={stars3} />
-
                       <Typography>سيئ</Typography>
                       <ProgressBar striped variant="info" now={stars2} label={stars2} />
-
                       <Typography>سيئ جدًا</Typography>
                       <ProgressBar striped variant="info" now={stars1} label={stars1} />
                     </>
@@ -203,14 +277,12 @@ export default function RatingSummary() {
                 )}
               </CardContent>
               <CardActions>
-                <Button href="rateprof" fullWidth variant="contained">
-                  قيّم المدرس
-                </Button>
+                <Button href="detailedRate" fullWidth variant="outlined">
+                  المزيد من التفاصيل 
+              </Button>
               </CardActions>
             </Card>
           </Grid>
-
-          {/* ))} */}
         </Grid>
       </Container>
     </React.Fragment>

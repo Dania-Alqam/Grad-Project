@@ -12,10 +12,18 @@ var GetProf = async function () {
     ;
   };
   
+  
+var getcourses = async function (profID) {
+ var course = await StudentModel.getcourses(profID);
+  return course;
+};
+
+
 
 module.exports = {
     getStudentInfo: getStudentInfo,
     GetProf: GetProf,
+    getcourses:getcourses,
 
 
 }

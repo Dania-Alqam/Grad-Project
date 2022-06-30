@@ -22,16 +22,10 @@ export default function Share() {
 
   const AddPost = () => {
     const token = localStorage.getItem("token");
-
-    console.log("&&&&&&&&&&&&&&&&");
     const formdata = new FormData();
     formdata.append("content", content);
-
     formdata.append("avatar", userInfo.file);
-
-    console.log(token);
     formdata.append("access_token", token);
-
     axios
       .post("http://localhost:5000/api/Posts/Add", formdata, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -46,11 +40,33 @@ export default function Share() {
       });
   };
 
+  const [imgPath, setimgPath] = useState("");
+
+  useEffect(() => {
+    console.log("inside share");
+    const token = localStorage.getItem("token");
+    console.log("token : " + token);
+
+    axios
+      .post(`http://localhost:5000/currentStudent`, { access_token: token })
+      .then((res) => {
+        setimgPath(res.data.imgPath);
+      });
+  }, []);
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+          <img
+            className="shareProfileImg"
+            src={"http://localhost:5000/imgs/" + { imgPath }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "http://localhost:5000/imgs/default.jpg";
+            }}
+            alt=""
+          />
           <input
             placeholder="ماذا يجول في خاطرك ؟"
             className="shareInput"

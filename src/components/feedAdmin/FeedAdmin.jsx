@@ -10,29 +10,23 @@ export default function FeedAdmin() {
   const [content, setcontent] = useState("");
   const [postImage, setPostImage] = useState("");
 
-  const [posts, setposts] = useState(null)
+  const [posts, setposts] = useState([]);
 
-  // useEffect(() => {
-  //   var token = localStorage.getItem("token");
+  const handleDelete = (postkey) => {
+    setposts(posts.filter((post) => post.postID != postkey));
+    console.log(postkey);
+  };
 
-  //   axios
-  //     .post("http://localhost:5000/posts/0", {admin_access_token:token}, {
-
-  //   })
-  //     .then((response) => {
-  //       setposts(response.data);
-  //       // then print response status
-  //       console.log(response);
-  //       console.log(posts)
-      
-  //     });
-  // }, []);
   var token = localStorage.getItem("token");
   useEffect(() => {
     (async () => {
-      const response = await axios.post('http://localhost:5000/posts/0', {admin_access_token:token},{
-        credentials: 'include'
-      });
+      const response = await axios.post(
+        "http://localhost:5000/posts/0",
+        { admin_access_token: token },
+        {
+          credentials: "include",
+        }
+      );
       // const response = await data.json();
       setposts(response.data);
     })();
@@ -41,27 +35,17 @@ export default function FeedAdmin() {
   if (posts === null) {
     return null;
   }
-  
-  // return (
-    // <div className="feed">
-    //   <div className="feedWrapper">
-    //     {/* <Share /> */}
-    //     {posts.map((p) => (
-    //       <Post key={p.postID} post={p} />
-    //     ))}
-    //   </div>
-    // </div>
-    return (
-  <div>
-    {posts.length > 0 ? (
-      posts.map(post => (
-        <Post key={post.postID}  post={post} />
-      ))
-    ) : (
-      <p>No posts</p>
-    )}
-  </div>
-);
+  return (
+    <div>
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <Post key={post.postID} post={post} handleDelete={handleDelete} />
+        ))
+      ) : (
+        <p>No posts</p>
+      )}
+    </div>
+  );
 
   // );
 }

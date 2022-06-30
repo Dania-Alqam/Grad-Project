@@ -2,8 +2,14 @@ import "./newProfessor.css";
 import Sidebar from "../../components/Adminsidebar/AdminSidebar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { Toolbar } from "@mui/material";
 export default function NewProfessor() {
+  return ( 
+    <Sidebar param={<NewProfessor1 />}/>
+ );
+}
+
+function NewProfessor1() {
   const [profName, setprofName] = useState("");
   const [officeID, setofficeID] = useState("");
   const [contactInfo, setcontactInfo] = useState("");
@@ -31,11 +37,11 @@ export default function NewProfessor() {
     formdata.append("officeID", officeID);
     formdata.append("depName", depName);
     formdata.append("contactInfo", contactInfo);
-    formdata.append("officePlace", officePlace);   
-     console.log(formdata.get("officeID"))
+    formdata.append("officePlace", officePlace);
+    console.log(formdata.get("officeID"))
 
     const token = localStorage.getItem("token");
-console.log(token)
+    console.log(token)
     formdata.append("admin_access_token", token);
 
 
@@ -58,6 +64,7 @@ console.log(token)
 
   return (
     <div className="newProduct">
+      <Toolbar/>
       <h1 className="addProductTitle">إضافة معلم جديد</h1>
       <div className="addProductForm">
         <div className="addProductItem">

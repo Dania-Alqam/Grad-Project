@@ -23,4 +23,21 @@ var posts = await PostService.getNotApprovedPosts(adminID);
 res.send(posts);
 });
 
+app.post("/posts/1",async (req,res) => {
+    console.log("posts 1")
+var token = req.body.access_token;
+if (token==null) {
+    res.status(403).json({message: "You're not allowed to access this page"});
+    return;
+}
+var decoded = jwt.verify(token,secrets.SecretKey);
+if (decoded.role!='s'){
+    res.status(400).json({message: "Something went wrong."});
+    return;
+}
+
+var posts = await PostService.getApprovedPost();
+res.send(posts);
+});
+
 }

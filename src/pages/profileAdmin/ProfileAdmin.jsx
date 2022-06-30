@@ -38,7 +38,7 @@ export default function ProfileAdmin() {
                       width="150"
                     />
                     <div class="mt-3">
-                      <h4>John Doe</h4>
+                      <h4>سندس عيسى </h4>
                       <p class="text-secondary mb-1">جامعة بيرزيت</p>
                       <p class="text-muted font-size-sm"></p>
                       <button class="btn btn-outline-primary">تحديث الصورة الشخصية</button>
@@ -54,33 +54,23 @@ export default function ProfileAdmin() {
                     <div class="col-sm-3">
                       <h6 class="mb-0">الاسم الأول</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">Kenneth Valdez</div>
+                    <div class="col-sm-9 text-secondary">سندس </div>
                   </div>
                   <hr
-                  // style={{
-                  //     color: color,
-                  //     backgroundColor: color,
-                  //     height: 5
-                  // }}
                   />{" "}
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">الاسم الثاني </h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">fip@jukmuh.al</div>
+                    <div class="col-sm-9 text-secondary">عيسى</div>
                   </div>
                   <hr
-                  // style={{
-                  //     color: color,
-                  //     backgroundColor: color,
-                  //     height: 5
-                  // }}
                   />
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">البريد الإلكتروني</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">(239) 816-9029</div>
+                    <div class="col-sm-9 text-secondary">admin@gmail.com</div>
                   </div>
                   <hr
                   // style={{
@@ -93,7 +83,7 @@ export default function ProfileAdmin() {
                     <div class="col-sm-3">
                       <h6 class="mb-0">الدائرة</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">(320) 380-4539</div>
+                    <div class="col-sm-9 text-secondary">علم الحاسوب</div>
                   </div>
                   <hr
                   // style={{
@@ -102,14 +92,7 @@ export default function ProfileAdmin() {
                   //     height: 5
                   // }}
                   />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">مجالات الاهتمام</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
-                    </div>
-                  </div>
+                 
                   <hr
                   // style={{
                   //     color: color,

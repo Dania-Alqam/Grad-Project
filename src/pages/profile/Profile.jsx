@@ -7,18 +7,6 @@ import axios from "axios";
 import { Component } from "react";
 import { useEffect, useState } from "react";
 
-// useEffect(() => {
-//   axios.get("http://localhost:5000/fieldofinterest", {}).then((response) => {
-//     console.log(response.data);
-//     const fi = response.data.map((T) => ({
-//       value: T.FName,
-//       label: T.FName,
-//       color: "#5243AA",
-//     }));
-//     console.log(fi);
-//     setFields(fi);
-//   });
-// }, []);
 
 export default function Profile() {
   const [persons, setPersons] = useState({});
@@ -29,11 +17,7 @@ export default function Profile() {
   const [imgPath, setimgPath] = useState("");
 
   useEffect(() => {
-    console.log("&&&&&&&head");
     const token = localStorage.getItem("token");
-    console.log("&&&&&&&head");
-    console.log("token : " + token);
-
     axios
       .post(`http://localhost:5000/currentStudent`, { access_token: token })
       .then((res) => {
@@ -43,6 +27,7 @@ export default function Profile() {
         setEmail(res.data.email);
         setDepartmentName(res.data.DepartmentName);
         setimgPath(res.data.imgPath)
+        console.log(res.data.imgPath)
       });
   }, []);
 
@@ -60,7 +45,7 @@ export default function Profile() {
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <img
-                      src={"http://localhost:5000/imgs/" + {}}
+                      src={"http://localhost:5000/imgs/" + imgPath}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = "http://localhost:5000/imgs/default.jpg";
@@ -149,7 +134,7 @@ export default function Profile() {
                     <div class="col-sm-3">
                       <h6 class="mb-0">مجالات الاهتمام</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">السياسة , الدين</div>
+                    <div class="col-sm-9 text-secondary">البرمجة,الجافا,التكنولوجيا,الهندسة</div>
                   </div>
                   <hr
                   // style={{

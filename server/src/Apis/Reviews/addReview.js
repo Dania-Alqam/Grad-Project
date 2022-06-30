@@ -10,13 +10,14 @@ module.exports = function (app) {
         var rating = req.body.rating;
         var opinion = req.body.opinion;
         var profID = req.body.profID;
-        var courseID = req.body.courseID;
+        var courseID = 1;
         var diffLevel = req.body.diffLevel;
 
         if (req.body.access_token == null) {
+
             res.sendStatus(401);
             return;
-        }
+        } 
         var decoded = jwt.verify(req.body.access_token, secrets.SecretKey);
         var studentID = decoded.ID;
         await ReviewService.AddReview(attendence, studyagain, rating, opinion, profID, courseID, studentID, diffLevel);

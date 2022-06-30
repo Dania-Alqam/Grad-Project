@@ -30,55 +30,54 @@ import axios from "axios";
 
 const theme = createTheme();
 
-function BasicSelect() {
+export default function Album() {
   const [department, setDepartment] = React.useState("");
 
   const handleChange = (event) => {
     setDepartment(event.target.value);
   };
 
-  return (
-    <Box sx={{ minWidth: 120, padding: 1 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-autowidth-label">الدائرة</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={department}
-          label="Department"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>--اختر الدائرة--</em>
-          </MenuItem>
-          <MenuItem value={10}>دائرة علم الحاسوب</MenuItem>
-          <MenuItem value={21}>
-            دائرة الهندسة الكهربائية وهندسة أنظمة الحاسوب
-          </MenuItem>
-          <MenuItem value={22}>دائرة الهندسة المدنية</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-}
-
-export default function Album() {
-  // state = {
-  //   professors: [],
-  // };
+  const [depName, setdep] = useState([]);
 
   const [professors, setprofessors] = useState([]);
+  const [professors1, setprofessors1] = useState([]);
+
+  const [selectedDepValue, setSelectedDepValue] = useState("");
+
+  const handleDepSelect = (event) => {
+    if (event.target.value === "دائرة علم الحاسوب")
+      setprofessors1(
+        professors.filter((prof) => prof.depName === "دائرة علم الحاسوب")
+      );
+    else
+      setprofessors1(
+        professors.filter((prof) => prof.depName === event.target.value)
+      );
+    setSelectedDepValue(event.target.value);
+    console.log(professors1);
+    console.log(event.target.value);
+
+    // console.log(event.target.value)
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/department", {}).then((response) => {
+      const dep = response.data.map((T) => ({
+        value: T.depName,
+        label: T.depName,
+        color: "#5243AA",
+      }));
+      setdep(dep);
+    });
+  }, []);
 
   useEffect(() => {
     // const { profID } = useParams();
     const url = "http://localhost:5000/getProf";
-    axios
-      .get(url)
-      .then((response) => response.data)
-      .then((data) => {
-        this.setState({ professors: data });
-        console.log(this.state.professors);
-      });
+    axios.get(url).then((response) => {
+      setprofessors(response.data);
+      setprofessors1(response.data);
+    });
   }, []);
 
   return (
@@ -111,8 +110,26 @@ export default function Album() {
               // spacing={2}
               justifyContent="center"
             >
-              <Button variant="outlined">الأعلى تقييماً</Button>
-              <BasicSelect />
+              {/* <Button variant="outlined">الأعلى تقييماً</Button> */}
+
+              <Box sx={{ minWidth: 120, padding: 1 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    الدائرة
+                  </InputLabel>
+
+                  <Select
+                    // value={this.state.value}
+                    //  closeMenuOnSelect={true}
+                    onChange={handleDepSelect}
+                  >
+                    {depName.map((dep) => (
+                      <MenuItem value={dep.value}>{dep.label}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              {/* <BasicSelect /> */}
             </Stack>
           </Container>
         </Box>
@@ -120,7 +137,7 @@ export default function Album() {
         <Container sx={{ py: 5 }} maxWidth="md" style={{ paddingTop: "0" }}>
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {setprofessors.map((rs, index) => (
+            {professors1.map((rs, index) => (
               <Grid item key={index} xs={12} sm={6} md={4}>
                 <Card
                   sx={{
@@ -163,7 +180,7 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button href="/profID/ratingSummary" size="small">
+                    <Button href={rs.profID + "/ratingSummary"} size="small">
                       عرض التقييم
                     </Button>
                   </CardActions>

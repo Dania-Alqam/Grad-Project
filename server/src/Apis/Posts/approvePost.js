@@ -4,6 +4,7 @@ var secrets = require("../../Config/Secrets");
 var PostService = require("../../Services/PostService");
 module.exports = function (app) {
     app.post("/approve/:postID", async (req, res) => {
+        console.log("Rhahaha");
         var token = req.body.admin_access_token;
         if (token == null) {
             res.status(403).json({ message: "You're not allowed to access this page" });
