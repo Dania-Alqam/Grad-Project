@@ -11,13 +11,14 @@ console.log("INSERT INTO POST (`content`,`date`,`time`,`studentID`,`adminID`,`ap
 return true;
 
 } 
+
 deletePost = async function(studentID, postID) {
     status = Executor.execute("");
     return status;
 }
 
 getAllPostsNotApprovedByAdminID = async function(adminID){
-var result = await Executor.execute("Select content,studentID,time, date, postImage from post where adminID = '"+adminID+"' AND approved = '0'");
+var result = await Executor.execute("Select content,studentID,time, date, postImage, postID from post where adminID = '"+adminID+"' AND approved = '0'");
 var Posts = []
 for (i = 0;i<result.length;i++) {
   element = result[i]
@@ -30,7 +31,9 @@ for (i = 0;i<result.length;i++) {
     postImage: element.postImage,
     firstName: res2[0].Sfirst_name,
     lastName: res2[0].Slast_name,
-    studentImage: res2[0].image
+    studentImage: res2[0].image,
+    postID: element.postID
+
 
   };
   Posts.push(post);
@@ -38,6 +41,30 @@ for (i = 0;i<result.length;i++) {
 console.log(Posts);
 return Posts;
 }
+
+getAllPostsApprovedByAdminID = async function(){
+  var result = await Executor.execute("Select content,studentID,time, date, postImage, postID from post where approved = '1'");
+  var Posts = []
+  for (i = 0;i<result.length;i++) {
+    element = result[i]
+    var query2 = "Select Sfirst_name,Slast_name, image from student where studentID = '"+element.studentID+"'";
+    var res2 = await Executor.execute(query2);
+    post = {
+      content: element.content,
+      time: element.time,
+      date: element.date,
+      postImage: element.postImage,
+      firstName: res2[0].Sfirst_name,
+      lastName: res2[0].Slast_name,
+      studentImage: res2[0].image,
+      postID: element.postID
+    };
+    Posts.push(post);
+  }
+  console.log(Posts);
+  return Posts;
+}
+
 approve = async function(adminID, postID) {
   var result = await Executor.execute("Select adminID, approved from post where postID = '"+postID+"'");
   if (!result[0]){
@@ -66,10 +93,14 @@ approve = async function(adminID, postID) {
     }
   }
 }
+
+
+
+
 module.exports = {
     AddPost: AddPost,
     deletePost: deletePost,
     getAllPostsNotApprovedByAdminID: getAllPostsNotApprovedByAdminID,
-    approve: approve
-
+    approve: approve,
+    getAllPostsApprovedByAdminID,getAllPostsApprovedByAdminID
 };

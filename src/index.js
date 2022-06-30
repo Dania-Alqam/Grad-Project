@@ -9,10 +9,13 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import SignUp from "./pages/register/Register";
+import CourseViewer from "./pages/library/courseViewer";
+import ResourcesCatagoriesViewer from "./pages/library/ResourcesCatagoriesViewer";
 import AdminApproval from "./pages/AdminApproval/AdminApproval";
-
 import SignInSide from "./pages/login/login";
+import ProfileAdmin from './pages/profileAdmin/ProfileAdmin';
 import SignInAdmin from "./pages/login/AdminLogin";
+import NewUser from "./pages/newUser/NewUser";
 import Sidebar from "./components/Adminsidebar/AdminSidebar";
 import NewProfessor from "./pages/newProfessor/NewProfessor";
 import ProductList from "./pages/productList/ProductList";
@@ -30,6 +33,12 @@ import RatingSummary from "./pages/professors/ratingSummary";
 import Dashboard from "./pages/professors/detailedRate";
 import RatingForm from "./pages/professors/rateprof";
  import Begin from "./pages/begin";
+ import Book from './pages/library/bookLib';
+import Exams from './pages/library/examsLib';
+import Slides from './pages/library/slidesLib';
+import Lec from './pages/library/lecturesLib';
+import Notes from './pages/library/notesLib';
+import Projects from './pages/library/projectsLib';
 import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import React, { lazy, Suspense } from "react";
 // const Begin = lazy(() => import("./pages/begin"));
@@ -47,8 +56,9 @@ render(
       <Route path="Dashboard" element={<DashboardLayout />} />
       <Route path="components/Navbar/navbar" element={<Navbar />} />
       <Route path="pages/professors/professorsPage" element={<Album />} />
-      <Route path="pages/professors/:profID/ratingSummary" element={<RatingSummary />} />      <Route path="pages/professors/detailedRate" element={<Dashboard />} />
-      <Route path="pages/professors/rateprof" element={<RatingForm />} />
+      <Route path="pages/professors/:profID/ratingSummary" element={<RatingSummary />} /> 
+      <Route path="pages/professors/:profID/detailedRate" element={<Dashboard />} />
+      <Route path="pages/professors/:profID/rateprof" element={<RatingForm />} />
       <Route path="pages/login/Login" element={<SignInSide />} />
       <Route path="pages/login/AdminLogin" element={<SignInAdmin />} />
       <Route path="pages/register/Register" element={<SignUp />} />
@@ -58,6 +68,17 @@ render(
       <Route path="pages/productList/ProductList" element={<ProductList/>} />
       <Route path="pages/postList/PostList" element={<PostList/>} />
       <Route path="pages/AdminApproval/AdminApproval" element={<AdminApproval/>} />
+      <Route path="pages/newUser/NewUser" element={<NewUser/>} />
+      <Route path="pages/profileAdmin/ProfileAdmin" element={<ProfileAdmin/>}/>
+      <Route path="pages/library/bookLib" element={<Book/>}/>
+<Route path="pages/library/examsLib" element={<Exams/>}/>
+<Route path="pages/library/slidesLib" element={<Slides/>}/>
+<Route path="pages/library/lecturesLib" element={<Lec/>}/>
+<Route path="pages/library/notesLib" element={<Notes/>}/>
+<Route path="pages/library/projectsLib" element={<Projects/>}/>
+<Route path="pages/library/ResourcesCatagoriesViewer" element={<ResourcesCatagoriesViewer/>} />
+      <Route path="pages/library/courseViewer" element={<CourseViewer/>} />
+      
     </Routes>
   </BrowserRouter>,
   rootElement
